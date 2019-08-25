@@ -1,0 +1,9 @@
+import { createSelector } from 'reselect';
+import { initialState } from './reducer';
+
+const select{{ properCase name }}Domain = state => state.{{ camelCase name }} || initialState;
+
+const makeSelect{{ properCase name }} = () =>
+  createSelector(select{{ properCase name }}Domain, substate => substate);
+
+export { makeSelect{{ properCase name }} };

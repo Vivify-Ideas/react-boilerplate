@@ -1,0 +1,10 @@
+import { defineMessages } from 'react-intl';
+
+export const scope = 'components.{{ properCase name }}';
+
+export default defineMessages({
+  header: {
+    id: `${scope}.header`,
+    defaultMessage: 'This is the {{ properCase name }} component!',
+  },
+});

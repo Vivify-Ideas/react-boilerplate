@@ -1,0 +1,9 @@
+export const {{ constantCase name }} = '[{{ titleCase name }}]'
+
+export const DEFAULT_ACTION = `${ {{ constantCase name }} } DEFAULT_ACTION`;
+
+export function defaultAction() {
+  return {
+    type: DEFAULT_ACTION,
+  };
+}
