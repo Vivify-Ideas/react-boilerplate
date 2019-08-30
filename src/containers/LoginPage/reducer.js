@@ -1,6 +1,5 @@
 import produce from 'immer';
-
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from './actions';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
 
 export const initialState = {
   isPending: false

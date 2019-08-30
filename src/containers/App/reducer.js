@@ -4,7 +4,7 @@ import {
   FETCH_AUTHENTICATED_USER_SUCCESS,
   LOGOUT_SUCCESS,
   SET_TOKEN
-} from './actions';
+} from './constants';
 
 export const initialState = {
   token: getItem('token') || null,

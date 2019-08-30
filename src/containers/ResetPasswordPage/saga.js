@@ -3,11 +3,8 @@ import { push } from 'connected-react-router';
 import request from 'utils/request';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
-import {
-  RESET_PASSWORD_REQUEST,
-  resetPasswordSuccess,
-  resetPasswordError
-} from './actions';
+import { resetPasswordSuccess, resetPasswordError } from './actions';
+import { RESET_PASSWORD_REQUEST } from './constants';
 import { LOGIN } from 'routes';
 import messages from './messages';
 

@@ -1,6 +1,4 @@
-export const DASHBAORD = '[Dashboard]';
-
-export const DEFAULT_ACTION = `${DASHBAORD} DEFAULT_ACTION`;
+import { DEFAULT_ACTION } from './constants';
 
 export function defaultAction() {
   return {

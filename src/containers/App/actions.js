@@ -1,10 +1,10 @@
-export const APP = '[App]';
-
-export const FETCH_AUTHENTICATED_USER_REQUEST = `${APP} FETCH_AUTHENTICATED_USER_REQUEST`;
-export const FETCH_AUTHENTICATED_USER_SUCCESS = `${APP} FETCH_AUTHENTICATED_USER_SUCCESS`;
-export const LOGOUT_REQUEST = `${APP} LOGOUT_REQUEST`;
-export const LOGOUT_SUCCESS = `${APP} LOGOUT_SUCCESS`;
-export const SET_TOKEN = `${APP} SET_TOKEN`;
+import {
+  FETCH_AUTHENTICATED_USER_REQUEST,
+  FETCH_AUTHENTICATED_USER_SUCCESS,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  SET_TOKEN
+} from './constants';
 
 export function fetchAuthenticatedUser() {
   return {

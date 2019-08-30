@@ -1,5 +1,4 @@
 import produce from 'immer';
-
 import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
@@ -7,7 +6,7 @@ import {
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR
-} from './actions';
+} from './constants';
 
 export const initialState = {
   isUpdateUserPending: false,

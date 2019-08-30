@@ -1,12 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { removeItem } from 'utils/localStorage';
 import request from 'utils/request';
-import {
-  FETCH_AUTHENTICATED_USER_REQUEST,
-  LOGOUT_REQUEST,
-  fetchAuthenticatedUserSuccess,
-  logoutSuccess
-} from './actions';
+import { fetchAuthenticatedUserSuccess, logoutSuccess } from './actions';
+import { FETCH_AUTHENTICATED_USER_REQUEST, LOGOUT_REQUEST } from './constants';
 
 export function* fetchUser() {
   try {

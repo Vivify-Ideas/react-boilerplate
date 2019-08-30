@@ -5,13 +5,12 @@ import request from 'utils/request';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
 import {
-  UPDATE_USER_REQUEST,
   updateUserSuccess,
   updateUserError,
-  CHANGE_PASSWORD_REQUEST,
   changePasswordSuccess,
   changePasswordError
 } from './actions';
+import { UPDATE_USER_REQUEST, CHANGE_PASSWORD_REQUEST } from './constants';
 import messages from './messages';
 
 export function* updateUser({

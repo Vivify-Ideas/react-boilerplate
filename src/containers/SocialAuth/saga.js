@@ -4,11 +4,8 @@ import request from 'utils/request';
 import { setItem } from 'utils/localStorage';
 import { DASHBOARD } from 'routes';
 import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
-import {
-  SOCIAL_AUTH_REQUEST,
-  socialAuthSuccess,
-  socialAuthError
-} from './actions';
+import { socialAuthSuccess, socialAuthError } from './actions';
+import { SOCIAL_AUTH_REQUEST } from './constants';
 
 export function* socialAuthentication({ accessToken, provider }) {
   try {

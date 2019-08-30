@@ -1,8 +1,8 @@
-export const FORGOT_PASSWORD = '[Forgot Password]';
-
-export const FORGOT_PASSWORD_REQUEST = `${FORGOT_PASSWORD} FORGOT_PASSWORD_REQUEST`;
-export const FORGOT_PASSWORD_SUCCESS = `${FORGOT_PASSWORD} FORGOT_PASSWORD_SUCCESS`;
-export const FORGOT_PASSWORD_ERROR = `${FORGOT_PASSWORD} FORGOT_PASSWORD_ERROR`;
+import {
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR
+} from './constants';
 
 export function forgotPassword(email, setErrors) {
   return {

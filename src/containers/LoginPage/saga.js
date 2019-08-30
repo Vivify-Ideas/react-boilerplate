@@ -5,7 +5,8 @@ import { setItem } from 'utils/localStorage';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { DASHBOARD } from 'routes';
 import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
-import { LOGIN_REQUEST, loginSuccess, loginError } from './actions';
+import { loginSuccess, loginError } from './actions';
+import { LOGIN_REQUEST } from './constants';
 
 export function* authorize({ email, password, meta: { setErrors } }) {
   try {

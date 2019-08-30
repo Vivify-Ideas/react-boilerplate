@@ -1,0 +1,5 @@
+export const REGISTER = '[Register]';
+
+export const REGISTER_REQUEST = `${REGISTER} REGISTER_REQUEST`;
+export const REGISTER_SUCCESS = `${REGISTER} REGISTER_SUCCESS`;
+export const REGISTER_ERROR = `${REGISTER} REGISTER_ERROR`;

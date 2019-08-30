@@ -3,7 +3,7 @@ import {
   SOCIAL_AUTH_REQUEST,
   SOCIAL_AUTH_SUCCESS,
   SOCIAL_AUTH_ERROR
-} from './actions';
+} from './constants';
 
 export const initialState = {
   isPending: false

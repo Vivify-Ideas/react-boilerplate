@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { ENQUEUE_SNACKBAR, REMOVE_SNACKBAR, CLOSE_SNACKBAR } from './actions';
+import { ENQUEUE_SNACKBAR, REMOVE_SNACKBAR, CLOSE_SNACKBAR } from './constants';
 
 export const initialState = {
   notifications: []

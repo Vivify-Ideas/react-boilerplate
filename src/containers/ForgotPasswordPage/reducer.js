@@ -3,7 +3,7 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_ERROR
-} from './actions';
+} from './constants';
 
 export const initialState = {
   isPending: false

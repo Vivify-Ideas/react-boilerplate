@@ -1,6 +1,9 @@
 import produce from 'immer';
-
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_ERROR } from './actions';
+import {
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_ERROR
+} from './constants';
 
 export const initialState = {
   isPending: false

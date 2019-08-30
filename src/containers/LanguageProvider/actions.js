@@ -1,6 +1,4 @@
-export const SOURCE = '[Language]';
-
-export const CHANGE_LOCALE = `${SOURCE} CHANGE_LOCALE`;
+import { CHANGE_LOCALE } from './constants';
 
 export function changeLocale(languageLocale) {
   return {

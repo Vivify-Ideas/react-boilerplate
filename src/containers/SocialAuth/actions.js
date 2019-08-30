@@ -1,8 +1,8 @@
-export const SOCIAL_AUTH = '[Social Authentication]';
-
-export const SOCIAL_AUTH_REQUEST = `${SOCIAL_AUTH} SOCIAL_AUTH_REQUEST`;
-export const SOCIAL_AUTH_SUCCESS = `${SOCIAL_AUTH} SOCIAL_AUTH_SUCCESS`;
-export const SOCIAL_AUTH_ERROR = `${SOCIAL_AUTH} SOCIAL_AUTH_ERROR`;
+import {
+  SOCIAL_AUTH_REQUEST,
+  SOCIAL_AUTH_SUCCESS,
+  SOCIAL_AUTH_ERROR
+} from './constants';
 
 export function socialAuthentication(accessToken, provider) {
   return {

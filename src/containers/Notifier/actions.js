@@ -1,8 +1,4 @@
-export const NOTIFIER = '[Notifier]';
-
-export const ENQUEUE_SNACKBAR = `${NOTIFIER} ENQUEUE_SNACKBAR`;
-export const CLOSE_SNACKBAR = `${NOTIFIER} CLOSE_SNACKBAR`;
-export const REMOVE_SNACKBAR = `${NOTIFIER} REMOVE_SNACKBAR`;
+import { ENQUEUE_SNACKBAR, CLOSE_SNACKBAR, REMOVE_SNACKBAR } from './constants';
 
 export function enqueueSnackbar(notification) {
   const key = notification.options && notification.options.key;

@@ -5,7 +5,8 @@ import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { setItem } from 'utils/localStorage';
 import { DASHBOARD } from 'routes';
 import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
-import { REGISTER_REQUEST, registerSuccess, registerError } from './actions';
+import { registerSuccess, registerError } from './actions';
+import { REGISTER_REQUEST } from './constants';
 
 export function* register({
   firstName: first_name,

@@ -1,11 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import request from 'utils/request';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
-import {
-  FORGOT_PASSWORD_REQUEST,
-  forgotPasswordSuccess,
-  forgotPasswordError
-} from './actions';
+import { forgotPasswordSuccess, forgotPasswordError } from './actions';
+import { FORGOT_PASSWORD_REQUEST } from './constants';
 import messages from './messages';
 
 export function* forgotPassword({ email, meta: { setErrors } }) {
