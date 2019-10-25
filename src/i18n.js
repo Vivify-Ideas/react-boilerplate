@@ -1,9 +1,9 @@
-const addLocaleData = require('react-intl').addLocaleData;
-const enLocaleData = require('react-intl/locale-data/en');
+if (!Intl.PluralRules) {
+  require('@formatjs/intl-pluralrules/polyfill');
+  require('@formatjs/intl-pluralrules/dist/locale-data/en');
+}
 
 const enTranslationMessages = require('./translations/en.json');
-
-addLocaleData(enLocaleData);
 
 const DEFAULT_LOCALE = 'en';
 

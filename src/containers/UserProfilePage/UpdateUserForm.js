@@ -1,35 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Formik, Form, Field } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { withFormikField } from 'utils/withFormikField';
+import { useIntl } from 'react-intl';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { updateUserSchema } from './validations';
 import messages from './messages';
 import ImageField from './ImageField';
 
-const FormikTextField = withFormikField(TextField);
-const FormikImageField = withFormikField(ImageField);
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  avatar: {
-    marginTop: -72,
-    display: 'flex',
-    justifyContent: 'center'
-  }
-}));
-
 export default function UpdateUserForm({ user, onSubmit, isPending }) {
-  const classes = useStyles();
+  const { formatMessage } = useIntl();
 
   function handleOnSubmit(values, { setErrors }) {
     const { firstName, lastName, avatar } = values;
@@ -48,46 +26,41 @@ export default function UpdateUserForm({ user, onSubmit, isPending }) {
       enableReinitialize
     >
       {({ setFieldValue }) => (
-        <Form className={classes.form}>
-          <div className={classes.avatar}>
-            <Field
-              component={FormikImageField}
-              name="avatar"
-              setFieldValue={setFieldValue}
-              user={user}
-            />
+        <Form>
+          <Field
+            component={ImageField}
+            name="avatar"
+            setFieldValue={setFieldValue}
+          />
+          <div>
+            <label htmlFor="firstName">
+              {formatMessage(messages.firstNameInputLabel)}
+            </label>
+            <Field type="text" name="firstName" required autoFocus />
+            <ErrorMessage name="firstName">
+              {msg =>
+                formatMessage(msg, {
+                  label: formatMessage(messages.firstNameInputLabel)
+                })
+              }
+            </ErrorMessage>
           </div>
-          <Field
-            component={FormikTextField}
-            type="text"
-            name="firstName"
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label={<FormattedMessage {...messages.firstNameInputLabel} />}
-            autoFocus
-          />
-          <Field
-            component={FormikTextField}
-            type="text"
-            name="lastName"
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label={<FormattedMessage {...messages.lastNameInputLabel} />}
-          />
-          <Button
-            disabled={isPending}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            <FormattedMessage {...messages.updateButton} />
-          </Button>
+          <div>
+            <label htmlFor="lastName">
+              {formatMessage(messages.lastNameInputLabel)}
+            </label>
+            <Field type="text" name="lastName" required />
+            <ErrorMessage name="lastName">
+              {msg =>
+                formatMessage(msg, {
+                  label: formatMessage(messages.lastNameInputLabel)
+                })
+              }
+            </ErrorMessage>
+          </div>
+          <button disabled={isPending} type="submit">
+            {formatMessage(messages.updateButton)}
+          </button>
         </Form>
       )}
     </Formik>

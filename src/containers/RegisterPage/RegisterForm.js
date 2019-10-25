@@ -1,31 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Formik, Form, Field } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
+import { useIntl } from 'react-intl';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerSchema } from './validations';
 import messages from './messages';
 
-import { withFormikField } from 'utils/withFormikField';
-
-const FormikTextField = withFormikField(TextField);
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
 export default function RegisterForm({ onSubmit, isPending }) {
-  const classes = useStyles();
+  const { formatMessage } = useIntl();
 
   const handleOnSubmit = (values, { setErrors }) => {
     const { firstName, lastName, email, password } = values;
@@ -43,64 +24,62 @@ export default function RegisterForm({ onSubmit, isPending }) {
       validationSchema={registerSchema}
       onSubmit={handleOnSubmit}
     >
-      <Form className={classes.form}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Field
-              component={FormikTextField}
-              type="text"
-              name="firstName"
-              variant="outlined"
-              required
-              fullWidth
-              label={<FormattedMessage {...messages.firstNameInputLabel} />}
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Field
-              component={FormikTextField}
-              type="text"
-              name="lastName"
-              variant="outlined"
-              required
-              fullWidth
-              label={<FormattedMessage {...messages.lastNameInputField} />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Field
-              component={FormikTextField}
-              type="email"
-              name="email"
-              variant="outlined"
-              required
-              fullWidth
-              label={<FormattedMessage {...messages.emailInputLabel} />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Field
-              component={FormikTextField}
-              type="password"
-              name="password"
-              variant="outlined"
-              required
-              fullWidth
-              label={<FormattedMessage {...messages.passwordInputLabel} />}
-            />
-          </Grid>
-        </Grid>
-        <Button
-          disabled={isPending}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          <FormattedMessage {...messages.registerButton} />
-        </Button>
+      <Form>
+        <div>
+          <label htmlFor="firstName">
+            {formatMessage(messages.firstNameInputLabel)}
+          </label>
+          <Field type="text" name="firstName" required autoFocus />
+          <ErrorMessage name="firstName">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.firstNameInputLabel)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            {formatMessage(messages.lastNameInputField)}
+          </label>
+          <Field type="text" name="lastName" required />
+          <ErrorMessage name="lastName">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.lastNameInputField)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor="email">
+            {formatMessage(messages.emailInputLabel)}
+          </label>
+          <Field type="email" name="email" required />
+          <ErrorMessage name="email">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.emailInputLabel)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor="password">
+            {formatMessage(messages.passwordInputLabel)}
+          </label>
+          <Field type="password" name="password" required />
+          <ErrorMessage name="password">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.passwordInputLabel)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <button disabled={isPending} type="submit">
+          {formatMessage(messages.registerButton)}
+        </button>
       </Form>
     </Formik>
   );

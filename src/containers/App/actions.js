@@ -3,7 +3,8 @@ import {
   FETCH_AUTHENTICATED_USER_SUCCESS,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  SET_TOKEN
+  SET_TOKEN,
+  SESSION_EXPIRED
 } from './constants';
 
 export function fetchAuthenticatedUser() {
@@ -35,5 +36,11 @@ export function setToken(token) {
   return {
     type: SET_TOKEN,
     token
+  };
+}
+
+export function sessionExpired() {
+  return {
+    type: SESSION_EXPIRED
   };
 }

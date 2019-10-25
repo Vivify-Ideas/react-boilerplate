@@ -10,7 +10,6 @@ import RegisterPage from 'containers/RegisterPage/Loadable';
 import ForgotPasswordPage from 'containers/ForgotPasswordPage/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import { withLayout } from 'components/Layout';
 import {
   WELCOME,
   DASHBOARD,
@@ -25,12 +24,8 @@ export default function Routes() {
   return (
     <Switch>
       <PublicRoute exact path={WELCOME} component={WelcomePage} />
-      <PrivateRoute exact path={DASHBOARD} component={withLayout(Dashboard)} />
-      <PrivateRoute
-        exact
-        path={USER_PROFILE}
-        component={withLayout(UserProfilePage)}
-      />
+      <PrivateRoute exact path={DASHBOARD} component={Dashboard} />
+      <PrivateRoute exact path={USER_PROFILE} component={UserProfilePage} />
       <PublicRoute exact path={LOGIN} component={LoginPage} />
       <PublicRoute exact path={REGISTER} component={RegisterPage} />
       <PublicRoute

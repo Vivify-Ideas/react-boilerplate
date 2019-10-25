@@ -17,9 +17,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Not Found Page
 - Error Boundry
 - Private/Public Routes
-- Refresh Token, Websockets, Snackbars, i18n, Material-UI, Redux, Redux Saga, Reselect, Formik, Yup, Immer, SEO, Sentry, Code Splitting, code generators...
+- Refresh Token, Websockets, Snackbars, i18n, Redux, Redux Saga, Reselect, Formik, Yup, Immer, SEO, Sentry, Code Splitting, code generators...
 
 This React Boilerplate is best used with our [Laravel Boilerplate](https://github.com/Vivify-Ideas/laravel-boilerplate).
+
+## Styles
+
+### SASS
+
+1. Run `npm install node-sass` or `yarn add node-sass` inside your workspace.
+2. Run `npm run generate` or `yarn generate` and select `sass`.
+3. Import `main.scss` from `src/styles` in `index.js`.
+
+### Styled Components
+
+1. Run `npm install styled-components` od `yarn add styled-components` inside your workspace.
+2. Import `ThemeProvider` from `styled-components` in `index.js`.
+3. Import `theme.js` from `src/theme.js` in `index.js`
+4. Wrap `<ErrorBoundry>` with `<ThemeProvider theme={theme}>`
 
 ## Available Scripts
 
@@ -61,6 +76,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ### `npm run generate`
 
 Allows you to auto-generate boilerplate code for common parts of your application, specifically components, and containers. You can also run npm run generate <part> to skip the first selection. (e.g. npm run generate container)
+
+### `npm run extract-intl
+
+This will generate json or yaml files from a glob. It will generate one file per locale, with the ids of each message defined by the `defineMessages` function of `react-intl`. The value of each of these keys will be an empty string, except for your `defaultLocale` which will be populated with the `defaultMessage`.
 
 ### `npm run analyze`
 

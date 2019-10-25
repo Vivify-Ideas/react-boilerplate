@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'components.AppBar';
+export const scope = 'app_bar';
 
 export default defineMessages({
   profileLink: {

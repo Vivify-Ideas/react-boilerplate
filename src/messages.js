@@ -14,5 +14,9 @@ export default defineMessages({
   oneOf: {
     id: `${scope}.validations.one_of`,
     defaultMessage: '{label} must match with {value}'
+  },
+  sessionExpired: {
+    id: `${scope}.session_expired`,
+    defaultMessage: 'Your session has expired'
   }
 });

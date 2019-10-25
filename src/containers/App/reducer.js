@@ -3,7 +3,8 @@ import { getItem } from 'utils/localStorage';
 import {
   FETCH_AUTHENTICATED_USER_SUCCESS,
   LOGOUT_SUCCESS,
-  SET_TOKEN
+  SET_TOKEN,
+  SESSION_EXPIRED
 } from './constants';
 
 export const initialState = {
@@ -19,6 +20,7 @@ const appReducer = (state = initialState, action) =>
         draft.user = action.user;
         break;
       case LOGOUT_SUCCESS:
+      case SESSION_EXPIRED:
         draft.user = null;
         draft.token = null;
         break;

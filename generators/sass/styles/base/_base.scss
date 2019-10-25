@@ -1,0 +1,59 @@
+/**
+ * Base styles
+ *
+ */
+
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  color: $project-color-text;
+  font-family: $project-font-stack;
+  font-size: $project-font-size-body;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: none;
+}
+
+html, body, #app {
+  display: flex;
+  flex-direction: column;
+}
+
+body, #app {
+  flex: 1 1 auto;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $project-color-app-bg;
+  min-height: 100%;
+}
+
+body {
+  overflow-y: auto;
+  line-height: 1.5;
+  background-color: transparent;
+}
+
+button {
+  color: $project-color-text;
+  cursor: pointer;
+}
+
+a {
+  color: $project-color-text;
+  cursor: pointer;
+}
+
+input {
+  font-family: $project-font-stack;
+}
+
+svg {
+  fill: currentColor;
+}
