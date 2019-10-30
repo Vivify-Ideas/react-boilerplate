@@ -1,9 +1,19 @@
-FROM node:9.8.0-onbuild as builder
-COPY . .
-RUN yarn
-ENV NODE_ENV=production
-RUN yarn build
+FROM node:10-alpine as builder
 
-FROM nginx:1.13-alpine
-COPY .config/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /usr/src/app/build /usr/src/app
+WORKDIR /app
+
+COPY package.json yarn.lock /app/
+RUN set -ex && \
+	yarn
+
+ARG NODE_ENV=production
+COPY . /app/
+RUN set -ex && \
+	yarn build
+
+
+FROM nginx:1-alpine
+
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /app/
+
