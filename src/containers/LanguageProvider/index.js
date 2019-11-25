@@ -8,12 +8,7 @@ export function LanguageProvider({ messages, children }) {
   const locale = useSelector(makeSelectLocale());
 
   return (
-    <IntlProvider
-      locale={locale}
-      key={locale}
-      massages={messages[locale]}
-      textComponent={React.Fragment}
-    >
+    <IntlProvider locale={locale} key={locale} messages={messages[locale]}>
       {React.Children.only(children)}
     </IntlProvider>
   );
