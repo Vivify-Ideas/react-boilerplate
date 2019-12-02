@@ -77,7 +77,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 Allows you to auto-generate boilerplate code for common parts of your application, specifically components, and containers. You can also run npm run generate <part> to skip the first selection. (e.g. npm run generate container)
 
-### `npm run extract-intl
+### `npm run extract-intl`
 
 This will generate json or yaml files from a glob. It will generate one file per locale, with the ids of each message defined by the `defineMessages` function of `react-intl`. The value of each of these keys will be an empty string, except for your `defaultLocale` which will be populated with the `defaultMessage`.
 
