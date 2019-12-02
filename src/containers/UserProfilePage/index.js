@@ -1,11 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { Helmet } from 'react-helmet';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet-async';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { makeSelectUser } from 'containers/App/selectors';
@@ -19,73 +14,43 @@ import ChangePasswordForm from './ChangePasswordForm';
 import reducer from './reducer';
 import saga from './saga';
 
-const useStyles = makeStyles(theme => ({
-  topPaper: {
-    padding: theme.spacing(3, 2),
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  paper: {
-    padding: theme.spacing(3, 2),
-    margin: theme.spacing(4, 0),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
-}));
-
 const key = 'userProfile';
 
-export function UserProfilePage({
-  user,
-  isUpdateUserPending,
-  isChangePasswordPending,
-  updateUser,
-  changePassword
-}) {
+function UserProfilePage() {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  const classes = useStyles();
+  const dispatch = useDispatch();
+  const user = useSelector(makeSelectUser());
+  const isUpdateUserPending = useSelector(makeSelectIsUpdateUserPending());
+  const isChangePasswordPending = useSelector(
+    makeSelectIsChangePasswordPending()
+  );
+  const submitUpdateUserForm = useCallback(
+    (...args) => dispatch(updateUser(...args)),
+    [dispatch]
+  );
+  const submitChangePasswordForm = useCallback(
+    (...args) => dispatch(changePassword(...args)),
+    [dispatch]
+  );
 
   return (
-    <Container maxWidth="xs" component="main">
+    <main>
       <Helmet>
         <title>Profile - React Boilerplate</title>
       </Helmet>
-      <Paper className={classes.topPaper}>
-        <UpdateUserForm
-          user={user}
-          isPending={isUpdateUserPending}
-          onSubmit={updateUser}
-        />
-      </Paper>
-      <Paper className={classes.paper}>
-        <ChangePasswordForm
-          isPending={isChangePasswordPending}
-          onSubmit={changePassword}
-        />
-      </Paper>
-    </Container>
+      <UpdateUserForm
+        user={user}
+        isPending={isUpdateUserPending}
+        onSubmit={submitUpdateUserForm}
+      />
+      <ChangePasswordForm
+        isPending={isChangePasswordPending}
+        onSubmit={submitChangePasswordForm}
+      />
+    </main>
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-  isUpdateUserPending: makeSelectIsUpdateUserPending(),
-  isChangePasswordPending: makeSelectIsChangePasswordPending()
-});
-
-const mapDispatchToProps = {
-  updateUser,
-  changePassword
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-
-export default compose(withConnect)(UserProfilePage);
+export default UserProfilePage;

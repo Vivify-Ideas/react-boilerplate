@@ -1,30 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Formik, Form, Field } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
+import { useIntl } from 'react-intl';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { changePasswordSchema } from './validations';
 import messages from './messages';
 
-import { withFormikField } from 'utils/withFormikField';
-
-const FormikTextField = withFormikField(TextField);
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
 export default function ChangePasswordForm({ onSubmit, isPending }) {
-  const classes = useStyles();
+  const { formatMessage } = useIntl();
 
   function handleOnSubmit(values, { setErrors, resetForm }) {
     const { currentPassword, newPassword, newPasswordConfirmation } = values;
@@ -47,52 +29,49 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
       validationSchema={changePasswordSchema}
       onSubmit={handleOnSubmit}
     >
-      <Form className={classes.form}>
-        <Field
-          component={FormikTextField}
-          type="password"
-          name="currentPassword"
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label={<FormattedMessage {...messages.currentPasswordInputLabel} />}
-        />
-        <Field
-          component={FormikTextField}
-          type="password"
-          name="newPassword"
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label={<FormattedMessage {...messages.newPasswordInputLabel} />}
-        />
-        <Field
-          component={FormikTextField}
-          type="password"
-          name="newPasswordConfirmation"
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          label={
-            <FormattedMessage {...messages.newPasswordConfirmationInputLabel} />
-          }
-          customErrorMessageValues={{
-            value: <FormattedMessage {...messages.newPasswordInputLabel} />
-          }}
-        />
-        <Button
-          disabled={isPending}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          <FormattedMessage {...messages.changePasswordButton} />
-        </Button>
+      <Form>
+        <div>
+          <label htmlFor="currentPassword">
+            {formatMessage(messages.currentPasswordInputLabel)}
+          </label>
+          <Field type="password" name="currentPassword" required />
+          <ErrorMessage name="currentPassword">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.currentPasswordInputLabel)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor="newPassword">
+            {formatMessage(messages.newPasswordInputLabel)}
+          </label>
+          <Field type="password" name="newPassword" required />
+          <ErrorMessage name="newPassword">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.newPasswordInputLabel)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor="newPasswordConfirmation">
+            {formatMessage(messages.newPasswordConfirmationInputLabel)}
+          </label>
+          <Field type="password" name="newPasswordConfirmation" required />
+          <ErrorMessage name="newPasswordConfirmation">
+            {msg =>
+              formatMessage(msg, {
+                label: formatMessage(messages.newPasswordConfirmation)
+              })
+            }
+          </ErrorMessage>
+        </div>
+        <button disabled={isPending} type="submit">
+          {formatMessage(messages.changePasswordButton)}
+        </button>
       </Form>
     </Formik>
   );

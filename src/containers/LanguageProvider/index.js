@@ -1,34 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { makeSelectLocale } from './selectors';
 
-export function LanguageProvider({ locale, messages, children }) {
+export function LanguageProvider({ messages, children }) {
+  const locale = useSelector(makeSelectLocale());
+
   return (
-    <IntlProvider
-      locale={locale}
-      key={locale}
-      massages={messages[locale]}
-      textComponent={React.Fragment}
-    >
+    <IntlProvider locale={locale} key={locale} messages={messages[locale]}>
       {React.Children.only(children)}
     </IntlProvider>
   );
 }
 
 LanguageProvider.propTypes = {
-  locale: PropTypes.string,
   messages: PropTypes.object,
   children: PropTypes.element.isRequired
 };
 
-const mapStateToProps = createStructuredSelector({
-  locale: makeSelectLocale()
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(withConnect)(LanguageProvider);
+export default LanguageProvider;

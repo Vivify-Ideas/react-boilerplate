@@ -1,8 +1,6 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { makeSelectIsSocialAuthPending } from './selectors';
@@ -14,18 +12,16 @@ import saga from './saga';
 
 const key = 'socialAuth';
 
-export function SocialAuth({
-  facebookButtonText,
-  googleButtonText,
-  socialAuthentication,
-  isSocialAuthPending
-}) {
+function SocialAuth({ facebookButtonText, googleButtonText }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
+  const dispatch = useDispatch();
+  const isSocialAuthPending = useSelector(makeSelectIsSocialAuthPending());
+
   function handleSocilaNetworkResponse(response, provider) {
     if (response.accessToken) {
-      socialAuthentication(response.accessToken, provider);
+      dispatch(socialAuthentication(response.accessToken, provider));
     }
   }
 
@@ -52,20 +48,4 @@ SocialAuth.propTypes = {
   googleButtonText: PropTypes.node
 };
 
-const mapStateToProps = createStructuredSelector({
-  isSocialAuthPending: makeSelectIsSocialAuthPending()
-});
-
-const mapDispatchToProps = {
-  socialAuthentication
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-
-export default compose(
-  withConnect,
-  memo
-)(SocialAuth);
+export default SocialAuth;

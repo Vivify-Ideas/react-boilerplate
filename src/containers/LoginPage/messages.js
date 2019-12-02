@@ -34,5 +34,9 @@ export default defineMessages({
   passwordInputLabel: {
     id: `${scope}.input_label.password`,
     defaultMessage: 'Password'
+  },
+  unauthorized: {
+    id: `${scope}.unauthorized`,
+    defaultMessage: 'Unauthorized'
   }
 });

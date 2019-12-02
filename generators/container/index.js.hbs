@@ -1,19 +1,11 @@
-{{#if memo}}
-import React, { memo } from 'react';
-{{else}}
 import React from 'react';
-{{/if}}
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 {{#if wantHeaders}}
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 {{/if}}
 {{#if wantMessages}}
-import { FormattedMessage } from 'react-intl';
-{{/if}}
-import { compose } from 'redux';
-{{#if wantActionsAndReducer}}
-import { createStructuredSelector } from 'reselect';
+import { useIntl } from 'react-intl';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import { useInjectReducer } from 'utils/injectReducer';
@@ -22,7 +14,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import { defaultAction } from './actions';
+// import { defaultAction } from './actions';
 import { makeSelect{{properCase name}} } from './selectors';
 import reducer from './reducer';
 {{/if}}
@@ -39,12 +31,21 @@ const key = '{{ camelCase name }}';
 const key = '{{ camelCase name }}';
 {{/if}}
 
-export function {{ properCase name }}() {
+function {{ properCase name }}() {
   {{#if wantActionsAndReducer}}
   useInjectReducer({ key, reducer });
   {{/if}}
   {{#if wantSaga}}
   useInjectSaga({ key, saga });
+  {{/if}}
+
+  const dispatch = useDispatch();
+  {{#if wantActionsAndReducer}}
+  const {{ camelCase name }} = useSelector(makeSelect{{properCase name}}());
+  {{/if}}
+
+  {{#if wantMessages}}
+  const { formatMessage } = useIntl();
   {{/if}}
 
   return (
@@ -56,35 +57,10 @@ export function {{ properCase name }}() {
       </Helmet>
     {{/if}}
     {{#if wantMessages}}
-      <FormattedMessage {...messages.header} />
+      <h1>{formatMessage(messages.header)}</h1>
     {{/if}}
     </div>
   );
 }
 
-{{ properCase name }}.propTypes = {
-  defaultAction: PropTypes.func.isRequired,
-};
-
-{{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
-  {{ camelCase name }}: makeSelect{{properCase name}}(),
-});
-{{/if}}
-
-const mapDispatchToProps = {
-  defaultAction
-};
-
-{{#if wantActionsAndReducer}}
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-{{else}}
-const withConnect = connect(null, mapDispatchToProps);
-{{/if}}
-
-export default compose(
-  withConnect,
-{{#if memo}}
-  memo,
-{{/if}}
-)({{ properCase name }});
+export default {{ properCase name }};

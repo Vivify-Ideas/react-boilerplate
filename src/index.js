@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import * as Sentry from '@sentry/browser';
-import { ThemeProvider } from '@material-ui/styles';
 import config from 'config';
 import history from 'utils/history';
 import App from 'containers/App';
@@ -11,8 +10,7 @@ import LanguageProvider from 'containers/LanguageProvider';
 import ErrorBoundry from 'containers/ErrorBoundary';
 import configureStore from 'configureStore';
 import * as serviceWorker from 'serviceWorker';
-import { translationMessages } from 'i18n';
-import theme from 'theme';
+import { translationMessages } from './i18n';
 
 const initialState = {};
 const store = configureStore(initialState, history);
@@ -28,11 +26,9 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <ThemeProvider theme={theme}>
-            <ErrorBoundry>
-              <App theme={theme} />
-            </ErrorBoundry>
-          </ThemeProvider>
+          <ErrorBoundry>
+            <App />
+          </ErrorBoundry>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

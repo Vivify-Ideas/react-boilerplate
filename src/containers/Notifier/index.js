@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 import { withSnackbar } from 'notistack';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectNotifications } from './selectors';
 import { removeSnackbar } from './actions';
@@ -12,14 +10,14 @@ import reducer from './reducer';
 
 const key = 'notifier';
 
-export function Notifier({
-  notifications,
-  enqueueSnackbar,
-  removeSnackbar,
-  closeSnackbar
-}) {
+export function Notifier({ enqueueSnackbar, closeSnackbar }) {
   useInjectReducer({ key, reducer });
   const displayed = useRef([]);
+
+  const dispatch = useDispatch();
+  const notifications = useSelector(makeSelectNotifications());
+
+  const { formatMessage } = useIntl();
 
   useEffect(() => {
     if (!notifications.length) {
@@ -32,17 +30,18 @@ export function Notifier({
 
       if (dismissed) {
         closeSnackbar(key);
-        removeSnackbar(key);
+        dispatch(removeSnackbar(key));
       } else {
-        enqueueSnackbar(<FormattedMessage {...message} />, {
+        enqueueSnackbar('', {
           key,
           ...options,
           onClose: (event, reason, key) => {
             if (options.onClose) {
               options.onClose(event, reason, key);
             }
-            removeSnackbar(key);
-          }
+            dispatch(removeSnackbar(key));
+          },
+          content: key => <div id={key}>{formatMessage(message)}</div>
         });
 
         storeDisplayed(key);
@@ -58,28 +57,8 @@ export function Notifier({
 }
 
 Notifier.propTypes = {
-  notifications: PropTypes.array,
-  removeSnackbar: PropTypes.func,
   enqueueSnackbar: PropTypes.func,
   closeSnackbar: PropTypes.func
 };
 
-const mapStateToProps = createStructuredSelector({
-  notifications: makeSelectNotifications()
-});
-
-const mapDispatchToProps = {
-  removeSnackbar
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-
-export default withSnackbar(
-  compose(
-    withConnect,
-    memo
-  )(Notifier)
-);
+export default withSnackbar(Notifier);

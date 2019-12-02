@@ -1,0 +1,99 @@
+/* Fonts */
+
+$project-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
+Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+$project-font-size-body: 16px;
+$project-font-size-stack: 1rem;
+$project-font-size-xxxl: 1rem * 2.75;
+$project-font-size-xxl: 1rem * 2.5;
+$project-font-size-xl: 1rem * 2;
+$project-font-size-lg: 1rem * 1.5;
+$project-font-size-md: 1rem * 1.25;
+$project-font-size-sm: 1rem * 0.75;
+$project-font-size-xs: 1rem * 0.625;
+
+$project-font-line-height-stack: 1.5;
+$project-font-line-height-sm: 1.3;
+$project-font-line-height-xs: 1.2;
+
+
+/* Colors */
+
+$project-color-white: #ffffff;
+$project-color-black: #000000;
+$project-color-transparent: rgba(0, 0, 0, 0);
+
+$project-color-gray-01: #767676;
+$project-color-gray-02: #414141;
+
+$project-color-primary: #e28657;
+$project-color-warning: #bd3547;
+$project-color-warning-input-bg: rgba(189, 53, 71, 0.1);
+$project-color-warning-autofill: #330c12;
+
+$project-color-text: $project-color-white;
+
+$project-color-app-bg: #000000;
+
+
+/* Radius */
+
+$project-radius-round: 50%;
+$project-radius-pill: 100px;
+$project-radius: 4px;
+$project-radius-sm: 2px;
+$project-radius-lg: 0.5rem;
+$project-radius-xl: 0.75rem;
+
+
+/* Spacings */
+
+$project-gutter: 1rem;
+$project-gutter-xs: $project-gutter * 0.25;
+$project-gutter-sm: $project-gutter * 0.5;
+$project-gutter-075: $project-gutter * 0.75;
+$project-gutter-xl: $project-gutter * 1.5;
+$project-gutter-2g: $project-gutter * 2;
+$project-gutter-3l: $project-gutter * 3;
+$project-gutter-4xl: $project-gutter * 4;
+
+
+/* Sizes */
+
+$project-size-main-container: 84rem; // 1344px
+$project-size-input-height: 3.375rem; // 54px
+$project-size-button-height: 3.75rem; // 60px
+$project-size-avatar: 4.0625rem; // 65px
+$project-size-avatar-sm: 3.5rem; // 56px
+
+$project-size-icon-sm: 1rem;
+$project-size-icon: 1.5rem;
+$project-size-icon-md: 1.75rem;
+$project-size-icon-lg: 2rem;
+$project-size-icon-xl: 2.75rem;
+
+$project-size-header: 6rem;
+
+
+/* Screens */
+
+$project-screen-full-hd: 120rem; // 1920px
+$project-screen-tablet-landscape: 64rem; // 1024px
+$project-screen-tablet-portrait: 48rem; // 768px
+$project-screen-mobile-landscape: 46.25rem; // 740px
+$project-screen-mobile-portrait: 23.4375rem; // 375px
+$project-screen-mobile-sm-portrait: 20rem; // 320px
+
+
+/* Z indexes */
+
+$project-z-index-header: 1;
+
+
+/* CSS Variables */
+
+//:root {
+//
+//}

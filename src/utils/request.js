@@ -5,10 +5,12 @@ import camelCase from 'lodash/camelCase';
 import mapKeys from 'lodash/mapKeys';
 
 import config from 'config';
-import { setItem } from 'utils/localStorage';
+import { setItem, removeItem } from 'utils/localStorage';
+import messages from 'messages';
 
-import { setToken, logout } from 'containers/App/actions';
+import { setToken, sessionExpired } from 'containers/App/actions';
 import { makeSelectToken } from 'containers/App/selectors';
+import { enqueueSnackbar } from 'containers/Notifier/actions';
 
 const api = axios.create({
   baseURL: config.api.baseUrl
@@ -33,11 +35,17 @@ export default function* request({ url, method, data, headers = {} }) {
 
     return yield call(api, { method, url, headers, data });
   } catch (error) {
-    if (error.status === 401) {
-      yield put(logout());
-    } else {
-      throw error;
+    if (error.status === 500) {
+      yield call(removeItem, 'token');
+      yield put(sessionExpired());
+      yield put(
+        enqueueSnackbar({
+          message: messages.sessionExpired
+        })
+      );
     }
+
+    throw error;
   }
 }
 
