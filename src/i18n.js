@@ -1,6 +1,6 @@
 if (!Intl.PluralRules) {
   require('@formatjs/intl-pluralrules/polyfill');
-  require('@formatjs/intl-pluralrules/dist/locale-data/en');
+  require('@formatjs/intl-pluralrules/locale-data/en');
 }
 
 const enTranslationMessages = require('./translations/en.json');
@@ -28,12 +28,12 @@ const formatTranslationMessages = (locale, messages) => {
 };
 
 const translationMessages = {
-  en: formatTranslationMessages('en', enTranslationMessages)
+  en: formatTranslationMessages('en', enTranslationMessages),
 };
 
 export {
   appLocales,
   formatTranslationMessages,
   translationMessages,
-  DEFAULT_LOCALE
+  DEFAULT_LOCALE,
 };
