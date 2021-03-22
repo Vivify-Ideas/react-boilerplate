@@ -1,4 +1,7 @@
 import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
   FETCH_AUTHENTICATED_USER_REQUEST,
   FETCH_AUTHENTICATED_USER_SUCCESS,
   LOGOUT_REQUEST,
@@ -6,6 +9,30 @@ import {
   SET_TOKEN,
   SESSION_EXPIRED,
 } from './actionTypes';
+
+export function login(email, password, setErrors) {
+  return {
+    type: LOGIN_REQUEST,
+    email,
+    password,
+    meta: {
+      setErrors,
+    },
+  };
+}
+
+export function loginSuccess() {
+  return {
+    type: LOGIN_SUCCESS,
+  };
+}
+
+export function loginError(error) {
+  return {
+    type: LOGIN_ERROR,
+    error,
+  };
+}
 
 export function fetchAuthenticatedUser() {
   return {

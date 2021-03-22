@@ -3,6 +3,9 @@ import { initialState } from './reducer';
 
 const selectAuth = (state) => state.auth || initialState;
 
+const makeSelectIsLoginPending = () =>
+  createSelector(selectAuth, (substate) => substate.isPending);
+
 const makeSelectUser = () =>
   createSelector(selectAuth, (substate) => substate.user);
 
@@ -16,6 +19,7 @@ const makeSelectToken = () =>
   createSelector(selectAuth, (substate) => substate.token);
 
 export {
+  makeSelectIsLoginPending,
   makeSelectUser,
   makeSelectError,
   makeSelectIsAuthenticated,
