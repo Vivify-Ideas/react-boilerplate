@@ -4,17 +4,17 @@ import {
   FETCH_AUTHENTICATED_USER_SUCCESS,
   LOGOUT_SUCCESS,
   SET_TOKEN,
-  SESSION_EXPIRED
-} from './constants';
+  SESSION_EXPIRED,
+} from './actionTypes';
 
 export const initialState = {
   token: getItem('token') || null,
-  user: null
+  user: null,
 };
 
 /* eslint-disable default-case */
 const appReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_AUTHENTICATED_USER_SUCCESS:
         draft.user = action.user;

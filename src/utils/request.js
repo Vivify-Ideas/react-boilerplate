@@ -8,30 +8,59 @@ import config from 'config';
 import { setItem, removeItem } from 'utils/localStorage';
 import messages from 'messages';
 
-import { setToken, sessionExpired } from 'containers/App/actions';
-import { makeSelectToken } from 'containers/App/selectors';
+import { setToken, sessionExpired } from 'store/auth/actions';
+import { makeSelectToken } from 'store/auth/selectors';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
 
 const api = axios.create({
-  baseURL: config.api.baseUrl
+  baseURL: config.api.baseUrl,
 });
 
 api.interceptors.response.use(
-  response => mapKeys(response.data, (_, key) => camelCase(key)),
-  error => Promise.reject(error.response)
+  (response) => mapKeys(response.data, (_, key) => camelCase(key)),
+  (error) => Promise.reject(error.response)
 );
 
 export default function* request({ url, method, data, headers = {} }) {
   try {
     let token = yield select(makeSelectToken());
 
-    if (token) {
-      if (Date.now() / 1000 >= jwtDecode(token).exp) {
-        token = yield call(refreshToken, token);
-      }
+    // TODO: Uncomment when done testing:
+    // if (token) {
+    //   if (Date.now() / 1000 >= jwtDecode(token).exp) {
+    //     token = yield call(refreshToken, token);
+    //   }
 
-      headers.Authorization = `Bearer ${token}`;
+    //   headers.Authorization = `Bearer ${token}`;
+    // }
+
+    // TODO: Remove when done testing:
+    if (url === '/auth/login') {
+      return yield new Promise((resolve) =>
+        setTimeout(
+          () =>
+            resolve({
+              accessToken: '123abc',
+            }),
+          1000
+        )
+      );
     }
+
+    if (url === '/auth/me') {
+      return yield new Promise((resolve) =>
+        setTimeout(
+          () =>
+            resolve({
+              firstName: 'John',
+              lastName: 'Doe',
+              avatar: null,
+            }),
+          1000
+        )
+      );
+    }
+    //-------------------------------
 
     return yield call(api, { method, url, headers, data });
   } catch (error) {
@@ -40,7 +69,7 @@ export default function* request({ url, method, data, headers = {} }) {
       yield put(sessionExpired());
       yield put(
         enqueueSnackbar({
-          message: messages.sessionExpired
+          message: messages.sessionExpired,
         })
       );
     }
@@ -54,8 +83,8 @@ export function* refreshToken(prevToken) {
     url: '/auth/refresh',
     method: 'post',
     headers: {
-      Authorization: `Bearer ${prevToken}`
-    }
+      Authorization: `Bearer ${prevToken}`,
+    },
   });
 
   yield call(setItem, 'token', token);

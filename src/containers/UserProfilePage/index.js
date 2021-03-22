@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectUser } from 'containers/App/selectors';
+import { makeSelectUser } from 'store/auth/selectors';
 import {
   makeSelectIsUpdateUserPending,
-  makeSelectIsChangePasswordPending
+  makeSelectIsChangePasswordPending,
 } from './selectors';
 import { updateUser, changePassword } from './actions';
 import UpdateUserForm from './UpdateUserForm';

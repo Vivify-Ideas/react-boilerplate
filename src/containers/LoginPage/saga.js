@@ -4,7 +4,7 @@ import request from 'utils/request';
 import { setItem } from 'utils/localStorage';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
 import { DASHBOARD } from 'routes';
-import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
+import { setToken, fetchAuthenticatedUser } from 'store/auth/actions';
 import { loginSuccess, loginError } from './actions';
 import { LOGIN_REQUEST } from './constants';
 import messages from './messages';
@@ -14,7 +14,7 @@ export function* authorize({ email, password }) {
     const { accessToken: token } = yield call(request, {
       url: '/auth/login',
       method: 'post',
-      data: { email, password }
+      data: { email, password },
     });
     yield put(loginSuccess());
     yield call(setItem, 'token', token);
@@ -25,7 +25,7 @@ export function* authorize({ email, password }) {
     if (error.status === 401) {
       yield put(
         enqueueSnackbar({
-          message: messages.unauthorized
+          message: messages.unauthorized,
         })
       );
     }

@@ -4,7 +4,7 @@ import request from 'utils/request';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { setItem } from 'utils/localStorage';
 import { DASHBOARD } from 'routes';
-import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
+import { setToken, fetchAuthenticatedUser } from 'store/auth/actions';
 import { registerSuccess, registerError } from './actions';
 import { REGISTER_REQUEST } from './constants';
 
@@ -13,7 +13,7 @@ export function* register({
   lastName: last_name,
   email,
   password,
-  meta: { setErrors }
+  meta: { setErrors },
 }) {
   try {
     const { accessToken: token } = yield call(request, {
@@ -23,8 +23,8 @@ export function* register({
         first_name,
         last_name,
         email,
-        password
-      }
+        password,
+      },
     });
     yield put(registerSuccess());
     yield call(setItem, 'token', token);

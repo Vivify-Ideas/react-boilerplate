@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import request from 'utils/request';
 import { setItem } from 'utils/localStorage';
 import { DASHBOARD } from 'routes';
-import { setToken, fetchAuthenticatedUser } from 'containers/App/actions';
+import { setToken, fetchAuthenticatedUser } from 'store/auth/actions';
 import { socialAuthSuccess, socialAuthError } from './actions';
 import { SOCIAL_AUTH_REQUEST } from './constants';
 
@@ -13,8 +13,8 @@ export function* socialAuthentication({ accessToken, provider }) {
       url: `/auth/social/${provider}`,
       method: 'post',
       data: {
-        accessToken
-      }
+        accessToken,
+      },
     });
     yield put(socialAuthSuccess());
     yield call(setItem, 'token', token);

@@ -4,43 +4,43 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   SET_TOKEN,
-  SESSION_EXPIRED
-} from './constants';
+  SESSION_EXPIRED,
+} from './actionTypes';
 
 export function fetchAuthenticatedUser() {
   return {
-    type: FETCH_AUTHENTICATED_USER_REQUEST
+    type: FETCH_AUTHENTICATED_USER_REQUEST,
   };
 }
 
 export function fetchAuthenticatedUserSuccess(user) {
   return {
     type: FETCH_AUTHENTICATED_USER_SUCCESS,
-    user
+    user,
   };
 }
 
 export function logout() {
   return {
-    type: LOGOUT_REQUEST
+    type: LOGOUT_REQUEST,
   };
 }
 
 export function logoutSuccess() {
   return {
-    type: LOGOUT_SUCCESS
+    type: LOGOUT_SUCCESS,
   };
 }
 
 export function setToken(token) {
   return {
     type: SET_TOKEN,
-    token
+    token,
   };
 }
 
 export function sessionExpired() {
   return {
-    type: SESSION_EXPIRED
+    type: SESSION_EXPIRED,
   };
 }
