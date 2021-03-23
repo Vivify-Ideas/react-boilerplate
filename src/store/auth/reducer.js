@@ -9,6 +9,8 @@ import {
   FORGOT_PASSWORD_ERROR,
   REGISTER_SUCCESS,
   REGISTER_ERROR,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR,
 } from './actionTypes';
 
 export const initialState = {
@@ -24,10 +26,19 @@ const appReducer = (state = initialState, action) =>
         draft.user = action.user;
         break;
       case LOGOUT_SUCCESS:
+        break;
       case FORGOT_PASSWORD_SUCCESS:
+        break;
       case FORGOT_PASSWORD_ERROR:
+        break;
       case REGISTER_SUCCESS:
+        break;
       case REGISTER_ERROR:
+        break;
+      case RESET_PASSWORD_SUCCESS:
+        break;
+      case RESET_PASSWORD_ERROR:
+        break;
       case SESSION_EXPIRED:
         draft.user = null;
         draft.token = null;

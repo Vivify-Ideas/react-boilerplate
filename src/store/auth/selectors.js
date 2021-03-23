@@ -5,6 +5,7 @@ import {
   LOGIN_REQUEST,
   FORGOT_PASSWORD_REQUEST,
   REGISTER_REQUEST,
+  RESET_PASSWORD_REQUEST,
 } from './actionTypes';
 
 const selectAuth = (state) => state.auth || initialState;
@@ -13,6 +14,9 @@ const makeSelectIsLoginPending = () => makeSelectIsLoading(LOGIN_REQUEST);
 
 const makeSelectIsForgotPasswordPending = () =>
   makeSelectIsLoading(FORGOT_PASSWORD_REQUEST);
+
+const makeSelectIsResetPasswordPending = () =>
+  makeSelectIsLoading(RESET_PASSWORD_REQUEST);
 
 const makeSelectIsRegisterPending = () => makeSelectIsLoading(REGISTER_REQUEST);
 
@@ -31,6 +35,7 @@ const makeSelectToken = () =>
 export {
   makeSelectIsLoginPending,
   makeSelectIsForgotPasswordPending,
+  makeSelectIsResetPasswordPending,
   makeSelectIsRegisterPending,
   makeSelectUser,
   makeSelectError,
