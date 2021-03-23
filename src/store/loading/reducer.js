@@ -7,6 +7,7 @@ export const initialState = {
   },
 };
 
+/* eslint-disable default-case */
 const loadingReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
