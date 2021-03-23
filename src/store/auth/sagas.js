@@ -15,6 +15,8 @@ import {
   registerError,
   resetPasswordSuccess,
   resetPasswordError,
+  socialAuthSuccess,
+  socialAuthError,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import { enqueueSnackbar } from '../notifier/actions';
@@ -25,6 +27,7 @@ import {
   FORGOT_PASSWORD_REQUEST,
   REGISTER_REQUEST,
   RESET_PASSWORD_REQUEST,
+  SOCIAL_AUTH_REQUEST,
 } from './actionTypes';
 import { DASHBOARD, LOGIN } from 'routes';
 import messages from 'containers/LoginPage/messages';
@@ -186,6 +189,29 @@ export function* resetPassword({
   }
 }
 
+export function* socialAuthentication({ type, accessToken, provider }) {
+  try {
+    yield put(startAction(type));
+    const { accessToken: token } = yield call(request, {
+      url: `/auth/social/${provider}`,
+      method: 'post',
+      data: {
+        accessToken,
+      },
+    });
+    yield put(socialAuthSuccess());
+    yield call(setItem, 'token', token);
+    yield put(setToken(token));
+    yield put(fetchAuthenticatedUser());
+    yield put(push(DASHBOARD));
+  } catch (error) {
+    yield put(stopAction(type));
+    yield put(socialAuthError(error.data));
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* appSaga() {
   yield takeLatest(LOGIN_REQUEST, authorize);
   yield takeLatest(FETCH_AUTHENTICATED_USER_REQUEST, fetchUser);
@@ -193,4 +219,5 @@ export default function* appSaga() {
   yield takeLatest(FORGOT_PASSWORD_REQUEST, forgotPassword);
   yield takeLatest(REGISTER_REQUEST, register);
   yield takeLatest(RESET_PASSWORD_REQUEST, resetPassword);
+  yield takeLatest(SOCIAL_AUTH_REQUEST, socialAuthentication);
 }

@@ -17,6 +17,9 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
+  SOCIAL_AUTH_REQUEST,
+  SOCIAL_AUTH_SUCCESS,
+  SOCIAL_AUTH_ERROR,
 } from './actionTypes';
 
 export function login(email, password, setErrors) {
@@ -148,5 +151,26 @@ export function resetPasswordSuccess() {
 export function resetPasswordError() {
   return {
     type: RESET_PASSWORD_ERROR,
+  };
+}
+
+export function socialAuthentication(accessToken, provider) {
+  return {
+    type: SOCIAL_AUTH_REQUEST,
+    accessToken,
+    provider,
+  };
+}
+
+export function socialAuthSuccess() {
+  return {
+    type: SOCIAL_AUTH_SUCCESS,
+  };
+}
+
+export function socialAuthError(error) {
+  return {
+    type: SOCIAL_AUTH_ERROR,
+    error,
   };
 }

@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectIsSocialAuthPending } from './selectors';
-import { socialAuthentication } from './actions';
+import { makeSelectIsSocialAuthPending } from 'store/auth/selectors';
+import { socialAuthentication } from 'store/auth/actions';
 import FacebookButton from 'components/FacebookButton';
 import GoogleButton from 'components/GoogleButton';
-import reducer from './reducer';
-import saga from './saga';
-
-const key = 'socialAuth';
-
 function SocialAuth({ facebookButtonText, googleButtonText }) {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
-
   const dispatch = useDispatch();
   const isSocialAuthPending = useSelector(makeSelectIsSocialAuthPending());
 
@@ -45,7 +35,7 @@ function SocialAuth({ facebookButtonText, googleButtonText }) {
 
 SocialAuth.propTypes = {
   facebookButtonText: PropTypes.node,
-  googleButtonText: PropTypes.node
+  googleButtonText: PropTypes.node,
 };
 
 export default SocialAuth;

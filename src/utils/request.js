@@ -35,7 +35,12 @@ export default function* request({ url, method, data, headers = {} }) {
     // }
 
     // TODO: Remove when done testing:
-    if (url === '/auth/login' || url === '/auth/register') {
+    if (
+      url === '/auth/login' ||
+      url === '/auth/register' ||
+      url === '/auth/social/facebook' ||
+      url === '/auth/social/google'
+    ) {
       return yield new Promise((resolve) =>
         setTimeout(
           () =>

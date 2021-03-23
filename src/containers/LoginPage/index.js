@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { makeSelectIsSocialAuthPending } from 'containers/SocialAuth/selectors';
-import { makeSelectIsLoginPending } from 'store/auth/selectors';
+import {
+  makeSelectIsLoginPending,
+  makeSelectIsSocialAuthPending,
+} from 'store/auth/selectors';
 import { login } from 'store/auth/actions';
 import SocialAuth from 'containers/SocialAuth';
 import LoginForm from './LoginForm';
