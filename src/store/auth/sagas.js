@@ -10,6 +10,7 @@ import {
   loginError,
   setToken,
 } from './actions';
+import { startAction, stopAction } from '../loading/actions';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
 import {
   LOGIN_REQUEST,
@@ -19,8 +20,9 @@ import {
 import { DASHBOARD } from 'routes';
 import messages from 'containers/LoginPage/messages';
 
-export function* authorize({ email, password }) {
+export function* authorize({ type, email, password }) {
   try {
+    yield put(startAction(type));
     const { accessToken: token } = yield call(request, {
       url: '/auth/login',
       method: 'post',
@@ -32,6 +34,7 @@ export function* authorize({ email, password }) {
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
+    yield put(stopAction(type));
     if (error.status === 401) {
       yield put(
         enqueueSnackbar({
@@ -40,10 +43,13 @@ export function* authorize({ email, password }) {
       );
     }
     yield put(loginError());
+  } finally {
+    yield put(stopAction(type));
   }
 }
 
-export function* fetchUser() {
+export function* fetchUser({ type }) {
+  yield put(startAction(type));
   try {
     const user = yield call(request, {
       url: '/auth/me',
@@ -51,7 +57,9 @@ export function* fetchUser() {
     });
     yield put(fetchAuthenticatedUserSuccess(user));
   } catch (error) {
-    //
+    yield put(stopAction(type));
+  } finally {
+    yield put(stopAction(type));
   }
 }
 

@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
+import { makeSelectIsLoading } from '../loading/selectors';
+import { LOGIN_REQUEST } from './actionTypes';
 
 const selectAuth = (state) => state.auth || initialState;
 
-const makeSelectIsLoginPending = () =>
-  createSelector(selectAuth, (substate) => substate.isPending);
+const makeSelectIsLoginPending = () => makeSelectIsLoading(LOGIN_REQUEST);
 
 const makeSelectUser = () =>
   createSelector(selectAuth, (substate) => substate.user);
