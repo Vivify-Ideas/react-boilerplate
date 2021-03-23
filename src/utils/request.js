@@ -60,6 +60,12 @@ export default function* request({ url, method, data, headers = {} }) {
         )
       );
     }
+
+    if (url === '/user/forgot-password') {
+      return yield new Promise((resolve) =>
+        setTimeout(() => resolve(true), 1000)
+      );
+    }
     //-------------------------------
 
     return yield call(api, { method, url, headers, data });

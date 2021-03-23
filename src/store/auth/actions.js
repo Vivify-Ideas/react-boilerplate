@@ -8,6 +8,9 @@ import {
   LOGOUT_SUCCESS,
   SET_TOKEN,
   SESSION_EXPIRED,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR,
 } from './actionTypes';
 
 export function login(email, password, setErrors) {
@@ -69,5 +72,27 @@ export function setToken(token) {
 export function sessionExpired() {
   return {
     type: SESSION_EXPIRED,
+  };
+}
+
+export function forgotPassword(email, setErrors) {
+  return {
+    type: FORGOT_PASSWORD_REQUEST,
+    email,
+    meta: {
+      setErrors,
+    },
+  };
+}
+
+export function forgotPasswordSuccess() {
+  return {
+    type: FORGOT_PASSWORD_SUCCESS,
+  };
+}
+
+export function forgotPasswordError() {
+  return {
+    type: FORGOT_PASSWORD_ERROR,
   };
 }

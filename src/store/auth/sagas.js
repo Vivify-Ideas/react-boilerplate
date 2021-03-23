@@ -9,6 +9,8 @@ import {
   loginSuccess,
   loginError,
   setToken,
+  forgotPasswordSuccess,
+  forgotPasswordError,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import { enqueueSnackbar } from 'containers/Notifier/actions';
@@ -16,9 +18,11 @@ import {
   LOGIN_REQUEST,
   FETCH_AUTHENTICATED_USER_REQUEST,
   LOGOUT_REQUEST,
+  FORGOT_PASSWORD_REQUEST,
 } from './actionTypes';
 import { DASHBOARD } from 'routes';
 import messages from 'containers/LoginPage/messages';
+import forgotPasswordMessages from 'containers/ForgotPasswordPage/messages';
 
 export function* authorize({ type, email, password }) {
   try {
@@ -76,8 +80,34 @@ export function* logout() {
   }
 }
 
+export function* forgotPassword({ type, email, meta: { setErrors } }) {
+  yield put(startAction(type));
+  try {
+    yield call(request, {
+      url: '/user/forgot-password',
+      method: 'post',
+      data: { email },
+    });
+    yield put(forgotPasswordSuccess());
+    yield put(
+      enqueueSnackbar({
+        message: forgotPasswordMessages.resetLinkSent,
+      })
+    );
+  } catch (error) {
+    yield put(stopAction(type));
+    if (error.status === 422) {
+      yield call(setErrors, error.data.errors);
+    }
+    yield put(forgotPasswordError());
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* appSaga() {
   yield takeLatest(LOGIN_REQUEST, authorize);
   yield takeLatest(FETCH_AUTHENTICATED_USER_REQUEST, fetchUser);
   yield takeLatest(LOGOUT_REQUEST, logout);
+  yield takeLatest(FORGOT_PASSWORD_REQUEST, forgotPassword);
 }
