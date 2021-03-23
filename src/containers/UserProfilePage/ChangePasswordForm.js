@@ -24,7 +24,7 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
       initialValues={{
         currentPassword: '',
         newPassword: '',
-        newPasswordConfirmation: ''
+        newPasswordConfirmation: '',
       }}
       validationSchema={changePasswordSchema}
       onSubmit={handleOnSubmit}
@@ -36,9 +36,9 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
           </label>
           <Field type="password" name="currentPassword" required />
           <ErrorMessage name="currentPassword">
-            {msg =>
+            {(msg) =>
               formatMessage(msg, {
-                label: formatMessage(messages.currentPasswordInputLabel)
+                label: formatMessage(messages.currentPasswordInputLabel),
               })
             }
           </ErrorMessage>
@@ -49,9 +49,9 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
           </label>
           <Field type="password" name="newPassword" required />
           <ErrorMessage name="newPassword">
-            {msg =>
+            {(msg) =>
               formatMessage(msg, {
-                label: formatMessage(messages.newPasswordInputLabel)
+                label: formatMessage(messages.newPasswordInputLabel),
               })
             }
           </ErrorMessage>
@@ -62,9 +62,12 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
           </label>
           <Field type="password" name="newPasswordConfirmation" required />
           <ErrorMessage name="newPasswordConfirmation">
-            {msg =>
+            {(msg) =>
               formatMessage(msg, {
-                label: formatMessage(messages.newPasswordConfirmation)
+                label: formatMessage(messages.newPasswordInputLabel),
+                value: formatMessage(
+                  messages.newPasswordConfirmationInputLabel
+                ),
               })
             }
           </ErrorMessage>
@@ -79,5 +82,5 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
 
 ChangePasswordForm.propTypes = {
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };

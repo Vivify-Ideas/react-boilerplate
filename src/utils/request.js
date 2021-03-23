@@ -66,7 +66,12 @@ export default function* request({ url, method, data, headers = {} }) {
       );
     }
 
-    if (url === '/user/forgot-password' || url === '/user/reset-password') {
+    if (
+      url === '/user/forgot-password' ||
+      url === '/user/reset-password' ||
+      url === '/user/change-password' ||
+      url === '/user'
+    ) {
       return yield new Promise((resolve) =>
         setTimeout(() => resolve(true), 1000)
       );

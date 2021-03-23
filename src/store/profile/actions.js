@@ -4,8 +4,8 @@ import {
   UPDATE_USER_ERROR,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_ERROR
-} from './constants';
+  CHANGE_PASSWORD_ERROR,
+} from './actionTypes';
 
 export function updateUser(firstName, lastName, avatar, setErrors) {
   return {
@@ -14,21 +14,21 @@ export function updateUser(firstName, lastName, avatar, setErrors) {
     lastName,
     avatar,
     meta: {
-      setErrors
-    }
+      setErrors,
+    },
   };
 }
 
 export function updateUserSuccess() {
   return {
-    type: UPDATE_USER_SUCCESS
+    type: UPDATE_USER_SUCCESS,
   };
 }
 
 export function updateUserError(error) {
   return {
     type: UPDATE_USER_ERROR,
-    error
+    error,
   };
 }
 
@@ -46,19 +46,19 @@ export function changePassword(
     newPasswordConfirmation,
     meta: {
       setErrors,
-      resetForm
-    }
+      resetForm,
+    },
   };
 }
 
 export function changePasswordSuccess() {
   return {
-    type: CHANGE_PASSWORD_SUCCESS
+    type: CHANGE_PASSWORD_SUCCESS,
   };
 }
 
 export function changePasswordError() {
   return {
-    type: CHANGE_PASSWORD_ERROR
+    type: CHANGE_PASSWORD_ERROR,
   };
 }
