@@ -13,7 +13,7 @@ import {
   forgotPasswordError,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
-import { enqueueSnackbar } from 'containers/Notifier/actions';
+import { enqueueSnackbar } from '../notifier/actions';
 import {
   LOGIN_REQUEST,
   FETCH_AUTHENTICATED_USER_REQUEST,

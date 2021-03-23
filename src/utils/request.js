@@ -10,7 +10,7 @@ import messages from 'messages';
 
 import { setToken, sessionExpired } from 'store/auth/actions';
 import { makeSelectToken } from 'store/auth/selectors';
-import { enqueueSnackbar } from 'containers/Notifier/actions';
+import { enqueueSnackbar } from 'store/notifier/actions';
 
 const api = axios.create({
   baseURL: config.api.baseUrl,

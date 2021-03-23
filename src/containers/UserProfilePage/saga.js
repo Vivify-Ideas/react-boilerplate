@@ -3,12 +3,12 @@ import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
 import request from 'utils/request';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
-import { enqueueSnackbar } from 'containers/Notifier/actions';
+import { enqueueSnackbar } from 'store/notifier/actions';
 import {
   updateUserSuccess,
   updateUserError,
   changePasswordSuccess,
-  changePasswordError
+  changePasswordError,
 } from './actions';
 import { UPDATE_USER_REQUEST, CHANGE_PASSWORD_REQUEST } from './constants';
 import messages from './messages';
@@ -17,7 +17,7 @@ export function* updateUser({
   firstName,
   lastName,
   avatar,
-  meta: { setErrors }
+  meta: { setErrors },
 }) {
   try {
     const form = new FormData();
@@ -31,12 +31,12 @@ export function* updateUser({
     yield call(request, {
       url: '/user',
       method: 'post',
-      data: form
+      data: form,
     });
     yield put(updateUserSuccess());
     yield put(
       enqueueSnackbar({
-        message: messages.profileUpdated
+        message: messages.profileUpdated,
       })
     );
   } catch (error) {
@@ -51,7 +51,7 @@ export function* changePassword({
   currentPassword: current_password,
   newPassword: new_password,
   newPasswordConfirmation: new_password_confirmation,
-  meta: { setErrors, resetForm }
+  meta: { setErrors, resetForm },
 }) {
   try {
     yield call(request, {
@@ -60,14 +60,14 @@ export function* changePassword({
       data: {
         current_password,
         new_password,
-        new_password_confirmation
-      }
+        new_password_confirmation,
+      },
     });
     yield put(changePasswordSuccess());
     yield call(resetForm);
     yield put(
       enqueueSnackbar({
-        message: messages.passwordChanged
+        message: messages.passwordChanged,
       })
     );
   } catch (error) {
