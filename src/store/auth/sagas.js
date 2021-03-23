@@ -11,6 +11,8 @@ import {
   setToken,
   forgotPasswordSuccess,
   forgotPasswordError,
+  registerSuccess,
+  registerError,
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import { enqueueSnackbar } from '../notifier/actions';
@@ -19,10 +21,12 @@ import {
   FETCH_AUTHENTICATED_USER_REQUEST,
   LOGOUT_REQUEST,
   FORGOT_PASSWORD_REQUEST,
+  REGISTER_REQUEST,
 } from './actionTypes';
 import { DASHBOARD } from 'routes';
 import messages from 'containers/LoginPage/messages';
 import forgotPasswordMessages from 'containers/ForgotPasswordPage/messages';
+import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 
 export function* authorize({ type, email, password }) {
   try {
@@ -105,9 +109,46 @@ export function* forgotPassword({ type, email, meta: { setErrors } }) {
   }
 }
 
+export function* register({
+  type,
+  firstName: first_name,
+  lastName: last_name,
+  email,
+  password,
+  meta: { setErrors },
+}) {
+  try {
+    yield put(startAction(type));
+    const { accessToken: token } = yield call(request, {
+      url: '/auth/register',
+      method: 'post',
+      data: {
+        first_name,
+        last_name,
+        email,
+        password,
+      },
+    });
+    yield put(registerSuccess());
+    yield call(setItem, 'token', token);
+    yield put(setToken(token));
+    yield put(fetchAuthenticatedUser());
+    yield put(push(DASHBOARD));
+  } catch (error) {
+    yield put(stopAction(type));
+    if (error.status === 422) {
+      yield call(setErrors, parseApiErrorsToFormik(error.data.erorrs));
+    }
+    yield put(registerError());
+  } finally {
+    yield put(stopAction(type));
+  }
+}
+
 export default function* appSaga() {
   yield takeLatest(LOGIN_REQUEST, authorize);
   yield takeLatest(FETCH_AUTHENTICATED_USER_REQUEST, fetchUser);
   yield takeLatest(LOGOUT_REQUEST, logout);
   yield takeLatest(FORGOT_PASSWORD_REQUEST, forgotPassword);
+  yield takeLatest(REGISTER_REQUEST, register);
 }

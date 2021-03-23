@@ -35,7 +35,7 @@ export default function* request({ url, method, data, headers = {} }) {
     // }
 
     // TODO: Remove when done testing:
-    if (url === '/auth/login') {
+    if (url === '/auth/login' || url === '/auth/register') {
       return yield new Promise((resolve) =>
         setTimeout(
           () =>

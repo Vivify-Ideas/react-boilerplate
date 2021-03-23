@@ -11,6 +11,9 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_ERROR,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_ERROR,
 } from './actionTypes';
 
 export function login(email, password, setErrors) {
@@ -94,5 +97,30 @@ export function forgotPasswordSuccess() {
 export function forgotPasswordError() {
   return {
     type: FORGOT_PASSWORD_ERROR,
+  };
+}
+
+export function register(firstName, lastName, email, password, setErrors) {
+  return {
+    type: REGISTER_REQUEST,
+    firstName,
+    lastName,
+    email,
+    password,
+    meta: {
+      setErrors,
+    },
+  };
+}
+
+export function registerSuccess() {
+  return {
+    type: REGISTER_SUCCESS,
+  };
+}
+
+export function registerError() {
+  return {
+    type: REGISTER_ERROR,
   };
 }
