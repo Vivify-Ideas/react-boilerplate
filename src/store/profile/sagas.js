@@ -1,7 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import isNull from 'lodash/isNull';
 import isObject from 'lodash/isObject';
-import request from 'utils/request';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import { enqueueSnackbar } from '../notifier/actions';
 import {
@@ -13,6 +12,8 @@ import {
 import { startAction, stopAction } from '../loading/actions';
 import { UPDATE_USER_REQUEST, CHANGE_PASSWORD_REQUEST } from './actionTypes';
 import messages from 'containers/UserProfilePage/messages';
+import profileService from 'services/ProfileService';
+import { HTTP_STATUS_CODES } from 'consts';
 
 export function* updateUser({
   type,
@@ -32,11 +33,7 @@ export function* updateUser({
       form.append('avatar', avatar);
     }
 
-    yield call(request, {
-      url: '/user',
-      method: 'post',
-      data: form,
-    });
+    yield call(profileService.updateProfile, form);
     yield put(updateUserSuccess());
     yield put(
       enqueueSnackbar({
@@ -44,7 +41,7 @@ export function* updateUser({
       })
     );
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }
     yield put(updateUserError());
@@ -62,14 +59,10 @@ export function* changePassword({
 }) {
   try {
     yield put(startAction(type));
-    yield call(request, {
-      url: '/user/change-password',
-      method: 'post',
-      data: {
-        current_password,
-        new_password,
-        new_password_confirmation,
-      },
+    yield call(profileService.changePassword, {
+      current_password,
+      new_password,
+      new_password_confirmation,
     });
     yield put(changePasswordSuccess());
     yield call(resetForm);
@@ -79,7 +72,7 @@ export function* changePassword({
       })
     );
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }
     yield put(changePasswordError());
