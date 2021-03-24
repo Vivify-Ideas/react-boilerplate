@@ -207,7 +207,7 @@ export function* socialAuthentication({ type, accessToken, provider }) {
   }
 }
 
-export default function* appSaga() {
+export default function* authSaga() {
   yield takeLatest(LOGIN_REQUEST, authorize);
   yield takeLatest(FETCH_AUTHENTICATED_USER_REQUEST, fetchUser);
   yield takeLatest(LOGOUT_REQUEST, logout);
