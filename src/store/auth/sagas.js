@@ -34,19 +34,15 @@ import messages from 'containers/LoginPage/messages';
 import forgotPasswordMessages from 'containers/ForgotPasswordPage/messages';
 import resetPasswordMessages from 'containers/ResetPasswordPage/messages';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
+import authService from 'services/AuthService';
 
 const getRouterLocationSearch = (state) => state.router.location.search;
 
 export function* authorize({ type, email, password }) {
   try {
     yield put(startAction(type));
-    const { accessToken: token } = yield call(request, {
-      url: '/auth/login',
-      method: 'post',
-      data: { email, password },
-    });
+    const token = yield call(authService.login, { email, password });
     yield put(loginSuccess());
-    yield call(setItem, 'token', token);
     yield put(setToken(token));
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
@@ -67,10 +63,7 @@ export function* authorize({ type, email, password }) {
 export function* fetchUser({ type }) {
   yield put(startAction(type));
   try {
-    const user = yield call(request, {
-      url: '/auth/me',
-      method: 'get',
-    });
+    const user = yield call(authService.fetchAuthenticatedUser);
     yield put(fetchAuthenticatedUserSuccess(user));
   } catch (error) {
     //
