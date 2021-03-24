@@ -44,7 +44,6 @@ export function* updateUser({
       })
     );
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 422) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }
@@ -80,7 +79,6 @@ export function* changePassword({
       })
     );
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 422) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }

@@ -51,7 +51,6 @@ export function* authorize({ type, email, password }) {
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 401) {
       yield put(
         enqueueSnackbar({
@@ -74,7 +73,7 @@ export function* fetchUser({ type }) {
     });
     yield put(fetchAuthenticatedUserSuccess(user));
   } catch (error) {
-    yield put(stopAction(type));
+    //
   } finally {
     yield put(stopAction(type));
   }
@@ -108,7 +107,6 @@ export function* forgotPassword({ type, email, meta: { setErrors } }) {
       })
     );
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 422) {
       yield call(setErrors, error.data.errors);
     }
@@ -144,7 +142,6 @@ export function* register({
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 422) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.erorrs));
     }
@@ -179,7 +176,6 @@ export function* resetPassword({
     );
     yield put(push(LOGIN));
   } catch (error) {
-    yield put(stopAction(type));
     if (error.status === 422) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }
@@ -205,7 +201,6 @@ export function* socialAuthentication({ type, accessToken, provider }) {
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
-    yield put(stopAction(type));
     yield put(socialAuthError(error.data));
   } finally {
     yield put(stopAction(type));
