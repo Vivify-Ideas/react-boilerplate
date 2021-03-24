@@ -156,6 +156,7 @@ class AuthService {
     try {
       const { status } = error.response;
 
+      /* eslint-disable default-case */
       switch (status) {
         case HTTP_STATUS_CODES.UNAUTHORIZED:
           this.destroySession();
