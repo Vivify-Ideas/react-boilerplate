@@ -21,7 +21,7 @@ class AuthService {
 
   changePassword = (data) => {
     return this.httpService.request({
-      url: ROUTES.UPDATE_PROFILE,
+      url: ROUTES.CHANGE_PASSWORD,
       method: HTTP_METHODS.POST,
       data,
     });

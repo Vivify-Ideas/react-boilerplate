@@ -43,7 +43,6 @@ export function* authorize({ type, email, password }) {
     const token = yield call(authService.login, { email, password });
     yield put(loginSuccess());
     yield put(setToken(token));
-    yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
     if (error.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
@@ -74,7 +73,6 @@ export function* fetchUser({ type }) {
 export function* logout() {
   try {
     yield call(authService.logout);
-    yield put(setToken(null));
     yield put(logoutSuccess());
   } catch (error) {
     //

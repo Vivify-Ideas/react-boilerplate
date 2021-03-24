@@ -28,6 +28,8 @@ const appReducer = (state = initialState, action) =>
         draft.user = action.user;
         break;
       case LOGOUT_SUCCESS:
+        draft.token = null;
+        draft.user = null;
         break;
       case FORGOT_PASSWORD_SUCCESS:
         break;

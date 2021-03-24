@@ -23,8 +23,8 @@ class AuthService {
 
   init = () => {
     this.setAuthToken(this.getAccessToken());
-    this.httpService.setRequestInterceptor(this.refreshToken);
-    this.httpService.setResponseInterceptors(
+    this.httpService.addRequestInterceptor(this.checkTokenExpiration);
+    this.httpService.addResponseInterceptors(
       this.handleSuccessResponse,
       this.handleErrorResponse
     );
@@ -131,12 +131,16 @@ class AuthService {
     this.httpService.removeHeaders(['Authorization']);
   };
 
-  handleInterceptRequest = async (request) => {
+  checkTokenExpiration = async (request) => {
+    if (request.url === ROUTES.TOKEN_REFRESH) {
+      return request;
+    }
+
     const token = this.getAccessToken();
 
     if (token && Date.now() / 1000 >= jwtDecode(token).exp) {
       const newToken = await this.refreshToken(token);
-      request.headers.authorization = newToken;
+      request.headers.Authorization = `Bearer ${newToken}`;
 
       return request;
     }
