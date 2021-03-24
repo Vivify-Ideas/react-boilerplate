@@ -24,55 +24,7 @@ class Axios {
   };
 
   request = (requestConfig) => {
-    //TODO: Remove when done testing:
-    const { url } = requestConfig;
-
-    if (
-      url === '/auth/login' ||
-      url === '/auth/register' ||
-      url === '/auth/social/facebook' ||
-      url === '/auth/social/google'
-    ) {
-      return new Promise((resolve) =>
-        setTimeout(
-          () =>
-            resolve({
-              accessToken: '123abc',
-            }),
-          1000
-        )
-      );
-    }
-
-    if (url === '/auth/me') {
-      return new Promise((resolve, reject) =>
-        setTimeout(
-          () =>
-            resolve({
-              firstName: 'John',
-              lastName: 'Doe',
-              avatar: null,
-            }),
-          // reject({
-          //   status: 401,
-          // }),
-          1000
-        )
-      );
-    }
-
-    if (
-      url === '/user/forgot-password' ||
-      url === '/user/reset-password' ||
-      url === '/user/change-password' ||
-      url === '/user'
-    ) {
-      return new Promise((resolve) => setTimeout(() => resolve(true), 1000));
-    }
-    // ---------------------------------
-
-    //TODO: Uncomment when done testing:
-    // return this.client(requestConfig);
+    return this.client(requestConfig);
   };
 
   attachHeaders = (headers) => {

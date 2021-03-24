@@ -3,6 +3,7 @@ export const HTTP_STATUS_CODES = {
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   SERVER_ERROR: 500,
+  VALIDATION_FAILED: 422,
 };
 
 export const HTTP_METHODS = {

@@ -33,6 +33,7 @@ import forgotPasswordMessages from 'containers/ForgotPasswordPage/messages';
 import resetPasswordMessages from 'containers/ResetPasswordPage/messages';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import authService from 'services/AuthService';
+import { HTTP_STATUS_CODES } from 'consts';
 
 const getRouterLocationSearch = (state) => state.router.location.search;
 
@@ -45,7 +46,7 @@ export function* authorize({ type, email, password }) {
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
-    if (error.status === 401) {
+    if (error.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
       yield put(
         enqueueSnackbar({
           message: messages.unauthorized,
@@ -91,7 +92,7 @@ export function* forgotPassword({ type, email, meta: { setErrors } }) {
       })
     );
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, error.data.errors);
     }
     yield put(forgotPasswordError());
@@ -121,7 +122,7 @@ export function* register({
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.erorrs));
     }
     yield put(registerError());
@@ -155,7 +156,7 @@ export function* resetPassword({
     );
     yield put(push(LOGIN));
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === HTTP_STATUS_CODES.VALIDATION_FAILED) {
       yield call(setErrors, parseApiErrorsToFormik(error.data.errors));
     }
     yield put(resetPasswordError());
