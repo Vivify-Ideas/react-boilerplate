@@ -1,7 +1,5 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setItem, removeItem } from 'utils/localStorage';
-import request from 'utils/request';
 import {
   fetchAuthenticatedUser,
   fetchAuthenticatedUserSuccess,
@@ -74,12 +72,9 @@ export function* fetchUser({ type }) {
 
 export function* logout() {
   try {
-    yield call(request, {
-      url: '/auth/logout',
-      method: 'post',
-    });
+    yield call(authService.logout);
+    yield put(setToken(null));
     yield put(logoutSuccess());
-    yield call(removeItem, 'token');
   } catch (error) {
     //
   }
@@ -88,11 +83,7 @@ export function* logout() {
 export function* forgotPassword({ type, email, meta: { setErrors } }) {
   yield put(startAction(type));
   try {
-    yield call(request, {
-      url: '/user/forgot-password',
-      method: 'post',
-      data: { email },
-    });
+    yield call(authService.forgotPassword, { email });
     yield put(forgotPasswordSuccess());
     yield put(
       enqueueSnackbar({
@@ -119,19 +110,14 @@ export function* register({
 }) {
   try {
     yield put(startAction(type));
-    const { accessToken: token } = yield call(request, {
-      url: '/auth/register',
-      method: 'post',
-      data: {
-        first_name,
-        last_name,
-        email,
-        password,
-      },
+    const token = yield call(authService.register, {
+      first_name,
+      last_name,
+      email,
+      password,
     });
-    yield put(registerSuccess());
-    yield call(setItem, 'token', token);
     yield put(setToken(token));
+    yield put(registerSuccess());
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {
@@ -156,10 +142,10 @@ export function* resetPassword({
     const search = yield select(getRouterLocationSearch);
     const params = new URLSearchParams(search);
     const token = params.get('forgot_password_token');
-    yield call(request, {
-      url: '/user/reset-password',
-      method: 'post',
-      data: { token, password, password_confirmation: passwordConfirmation },
+    yield call(authService.resetPassword, {
+      token,
+      password,
+      password_confirmation: passwordConfirmation,
     });
     yield put(resetPasswordSuccess());
     yield put(
@@ -181,16 +167,15 @@ export function* resetPassword({
 export function* socialAuthentication({ type, accessToken, provider }) {
   try {
     yield put(startAction(type));
-    const { accessToken: token } = yield call(request, {
-      url: `/auth/social/${provider}`,
-      method: 'post',
-      data: {
+    const { accessToken: token } = yield call(
+      authService.socialAuth,
+      provider,
+      {
         accessToken,
-      },
-    });
-    yield put(socialAuthSuccess());
-    yield call(setItem, 'token', token);
+      }
+    );
     yield put(setToken(token));
+    yield put(socialAuthSuccess());
     yield put(fetchAuthenticatedUser());
     yield put(push(DASHBOARD));
   } catch (error) {

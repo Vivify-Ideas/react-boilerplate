@@ -70,11 +70,60 @@ class AuthService {
     return token;
   };
 
+  logout = async () => {
+    await this.httpService.request({
+      url: ROUTES.LOGOUT,
+      method: HTTP_METHODS.POST,
+    });
+
+    this.destroySession();
+  };
+
   fetchAuthenticatedUser = () => {
     return this.httpService.request({
       url: ROUTES.ME,
       method: HTTP_METHODS.GET,
     });
+  };
+
+  forgotPassword = (data) => {
+    return this.httpService.request({
+      url: ROUTES.FORGOT_PASSWORD,
+      method: HTTP_METHODS.POST,
+      data,
+    });
+  };
+
+  resetPassword = (data) => {
+    return this.httpService.request({
+      url: ROUTES.RESET_PASSWORD,
+      method: HTTP_METHODS.POST,
+      data,
+    });
+  };
+
+  register = async (data) => {
+    const { accessToken: token } = await this.httpService.request({
+      url: ROUTES.REGISTER,
+      method: HTTP_METHODS.POST,
+      data,
+    });
+
+    this.setAuthToken(token);
+
+    return token;
+  };
+
+  socialAuth = async (provider, data) => {
+    const { accessToken: token } = await this.httpService.request({
+      url: ROUTES.SOCIAL(provider),
+      method: HTTP_METHODS.POST,
+      data,
+    });
+
+    this.setAuthToken(token);
+
+    return token;
   };
 
   destroySession = () => {
