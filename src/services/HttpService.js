@@ -4,7 +4,7 @@ import mapKeys from 'lodash/mapKeys';
 
 import config from '../config';
 
-class Axios {
+class HttpClient {
   constructor() {
     this.client = axios.create({
       baseURL: config.api.baseUrl,
@@ -92,6 +92,6 @@ class HttpService {
   };
 }
 
-const httpService = new HttpService(new Axios());
+const httpService = new HttpService(new HttpClient());
 
 export default httpService;
