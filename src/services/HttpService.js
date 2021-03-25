@@ -52,7 +52,7 @@ class HttpService {
   init = () => {
     this.addResponseInterceptors(
       (response) => mapKeys(response.data, (_, key) => camelCase(key)),
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error.response)
     );
   };
 
