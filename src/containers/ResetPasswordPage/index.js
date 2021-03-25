@@ -2,21 +2,12 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { useIntl } from 'react-intl';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectIsResetPasswordPending } from './selectors';
-import { resetPassword } from './actions';
+import { makeSelectIsResetPasswordPending } from 'store/auth/selectors';
+import { resetPassword } from 'store/auth/actions';
 import ResetPasswordForm from './ResetPasswordForm';
-import reducer from './reducer';
-import saga from './saga';
 import messages from './messages';
 
-const key = 'resetPassword';
-
 export function ResetPasswordPage() {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
-
   const dispatch = useDispatch();
   const isResetPasswordPending = useSelector(
     makeSelectIsResetPasswordPending()

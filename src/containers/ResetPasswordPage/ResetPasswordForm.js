@@ -17,7 +17,7 @@ export default function ResetPasswordForm({ onSubmit, isPending }) {
     <Formik
       initialValues={{
         password: '',
-        passwordConfirmation: ''
+        passwordConfirmation: '',
       }}
       validationSchema={resetPasswordSchema}
       onSubmit={handleOnSubmit}
@@ -29,9 +29,9 @@ export default function ResetPasswordForm({ onSubmit, isPending }) {
           </label>
           <Field type="password" name="password" required autoFocus />
           <ErrorMessage name="password">
-            {msg =>
+            {(msg) =>
               formatMessage(msg, {
-                label: formatMessage(messages.passwordInputLabel)
+                label: formatMessage(messages.passwordInputLabel),
               })
             }
           </ErrorMessage>
@@ -42,9 +42,10 @@ export default function ResetPasswordForm({ onSubmit, isPending }) {
           </label>
           <Field type="password" name="passwordConfirmation" required />
           <ErrorMessage name="passwordConfirmation">
-            {msg =>
+            {(msg) =>
               formatMessage(msg, {
-                label: formatMessage(messages.passwordConfirmationInputLabel)
+                label: formatMessage(messages.passwordInputLabel),
+                value: formatMessage(messages.passwordConfirmationInputLabel),
               })
             }
           </ErrorMessage>
@@ -59,5 +60,5 @@ export default function ResetPasswordForm({ onSubmit, isPending }) {
 
 ResetPasswordForm.propTypes = {
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };

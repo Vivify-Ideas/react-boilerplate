@@ -8,7 +8,7 @@ import history from 'utils/history';
 import App from 'containers/App';
 import LanguageProvider from 'containers/LanguageProvider';
 import ErrorBoundry from 'containers/ErrorBoundary';
-import configureStore from 'configureStore';
+import configureStore from 'store';
 import * as serviceWorker from 'serviceWorker';
 import { translationMessages } from './i18n';
 

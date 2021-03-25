@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectIsAuthenticated } from 'containers/App/selectors';
+import { makeSelectIsAuthenticated } from 'store/auth/selectors';
 
 export function PrivateRoute({
   component: Component,
@@ -14,7 +14,7 @@ export function PrivateRoute({
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
       }
     />
@@ -22,11 +22,11 @@ export function PrivateRoute({
 }
 
 PrivateRoute.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  isAuthenticated: makeSelectIsAuthenticated()
+  isAuthenticated: makeSelectIsAuthenticated(),
 });
 
 const withConnect = connect(mapStateToProps);
