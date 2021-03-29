@@ -113,7 +113,7 @@
       "new_password_confirmation": "New Password Confirmation"
     },
     "notification": {
-      "profile_update": "Profile informations succefully updated",
+      "profile_update": "Profile information succefully updated",
       "password_changed": "Password succefully changed"
     }
   },
