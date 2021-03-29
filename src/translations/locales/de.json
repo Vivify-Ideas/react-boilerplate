@@ -7,8 +7,8 @@
     }
   },
   "dashboard": {
-    "header": "Start your next React project in seconds",
-    "select_language": "Select language"
+    "header": "Starten Sie Ihr nächstes React-Projekt in Sekunden",
+    "select_language": "Sprache auswählen"
   },
   "error_page": {
     "header": "This is embarrassing 🤦‍",
