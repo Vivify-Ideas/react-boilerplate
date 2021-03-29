@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { forgotPasswordSchema } from './validations';
-import messages from './messages';
 
 function ForgotPasswordForm({ onSubmit, isPending }) {
   const handleOnSubmit = (values, { setErrors }) => {
@@ -11,12 +10,12 @@ function ForgotPasswordForm({ onSubmit, isPending }) {
     onSubmit(email, setErrors);
   };
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   return (
     <Formik
       initialValues={{
-        email: ''
+        email: '',
       }}
       validationSchema={forgotPasswordSchema}
       onSubmit={handleOnSubmit}
@@ -24,19 +23,19 @@ function ForgotPasswordForm({ onSubmit, isPending }) {
       <Form>
         <div>
           <label htmlFor="email">
-            {formatMessage(messages.emailInputLabel)}
+            {t('forgot_password_page.input_label.email')}
           </label>
           <Field type="email" name="email" required autoFocus />
           <ErrorMessage name="email">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.emailInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('forgot_password_page.input_label.email'),
               })
             }
           </ErrorMessage>
         </div>
         <button disabled={isPending} type="submit">
-          {formatMessage(messages.resetPasswordButton)}
+          {t('forgot_password_page.button.reset_password')}
         </button>
       </Form>
     </Formik>
@@ -45,7 +44,7 @@ function ForgotPasswordForm({ onSubmit, isPending }) {
 
 ForgotPasswordForm.propTypes = {
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };
 
 export default ForgotPasswordForm;

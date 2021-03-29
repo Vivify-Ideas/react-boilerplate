@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { resetPasswordSchema } from './validations';
-import messages from './messages';
 
 export default function ResetPasswordForm({ onSubmit, isPending }) {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   const handleOnSubmit = (values, { setErrors }) => {
     const { password, passwordConfirmation } = values;
@@ -25,33 +24,35 @@ export default function ResetPasswordForm({ onSubmit, isPending }) {
       <Form>
         <div>
           <label htmlFor="password">
-            {formatMessage(messages.passwordInputLabel)}
+            {t('reset_password_page.input_label.password')}
           </label>
           <Field type="password" name="password" required autoFocus />
           <ErrorMessage name="password">
             {(msg) =>
-              formatMessage(msg, {
-                label: formatMessage(messages.passwordInputLabel),
+              t(msg, {
+                label: t('reset_password_page.input_label.password'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="passwordConfirmation">
-            {formatMessage(messages.passwordConfirmationInputLabel)}
+            {t('reset_password_page.input_label.password_confirmation')}
           </label>
           <Field type="password" name="passwordConfirmation" required />
           <ErrorMessage name="passwordConfirmation">
             {(msg) =>
-              formatMessage(msg, {
-                label: formatMessage(messages.passwordInputLabel),
-                value: formatMessage(messages.passwordConfirmationInputLabel),
+              t(msg, {
+                label: t('reset_password_page.input_label.password'),
+                value: t(
+                  'reset_password_page.input_label.password_confirmation'
+                ),
               })
             }
           </ErrorMessage>
         </div>
         <button disabled={isPending} type="submit">
-          {formatMessage(messages.resetPasswordButton)}
+          {t('reset_password_page.button.reset_password')}
         </button>
       </Form>
     </Formik>

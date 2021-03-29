@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import {
   makeSelectIsLoginPending,
@@ -10,7 +10,6 @@ import {
 import { login } from 'store/auth/actions';
 import SocialAuth from 'containers/SocialAuth';
 import LoginForm from './LoginForm';
-import messages from './messages';
 import { REGISTER, FORGOT_PASSWORD } from 'routes';
 
 function LoginPage() {
@@ -21,7 +20,7 @@ function LoginPage() {
     dispatch,
   ]);
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   const renderPendingIndicator = <div>Please wait...</div>;
 
@@ -30,19 +29,19 @@ function LoginPage() {
       <Helmet>
         <title>Login - React Boilerplate</title>
       </Helmet>
-      <h1>{formatMessage(messages.loginTitle)}</h1>
+      <h1>{t('login_page.text.login_title')}</h1>
       {!isSocialAuthPending ? (
         <>
           <SocialAuth
-            facebookButtonText={formatMessage(messages.facebookButton)}
-            googleButtonText={formatMessage(messages.googleButton)}
+            facebookButtonText={t('login_page.button.facebook')}
+            googleButtonText={t('login_page.button.google')}
           />
           <LoginForm onSubmit={submitLoginForm} isPending={isLoginPending} />
           <Link to={FORGOT_PASSWORD}>
-            {formatMessage(messages.forgotPasswordLink)}
+            {t('login_page.link.forgot_password')}
           </Link>
           <br />
-          <Link to={REGISTER}>{formatMessage(messages.registerLink)}</Link>
+          <Link to={REGISTER}>{t('login_page.link.register')}</Link>
         </>
       ) : (
         renderPendingIndicator

@@ -2,6 +2,6 @@ import Yup from 'utils/validations';
 
 export const forgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
-    .email()
-    .required()
+    .email('global.validations.email')
+    .required('global.validations.required'),
 });

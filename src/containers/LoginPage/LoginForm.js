@@ -1,56 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loginSchema } from './validations';
-import messages from './messages';
 
 export default function LoginForm({ onSubmit, isPending }) {
-  const handleOnSubmit = values => {
+  const handleOnSubmit = (values) => {
     const { email, password } = values;
     onSubmit(email, password);
   };
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   return (
     <Formik
       initialValues={{
         email: '',
-        password: ''
+        password: '',
       }}
       validationSchema={loginSchema}
       onSubmit={handleOnSubmit}
     >
       <Form>
         <div>
-          <label htmlFor="email">
-            {formatMessage(messages.emailInputLabel)}
-          </label>
+          <label htmlFor="email">{t('login_page.input_label.email')}</label>
           <Field type="email" name="email" required autoFocus />
           <ErrorMessage name="email">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.emailInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('login_page.input_label.email'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="password">
-            {formatMessage(messages.passwordInputLabel)}
+            {t('login_page.input_label.password')}
           </label>
           <Field type="password" name="password" required />
           <ErrorMessage name="password">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.passwordInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('login_page.input_label.password'),
               })
             }
           </ErrorMessage>
         </div>
         <button disabled={isPending} type="submit">
-          {formatMessage(messages.loginButton)}
+          {t('login_page.button.login')}
         </button>
       </Form>
     </Formik>
@@ -59,5 +56,5 @@ export default function LoginForm({ onSubmit, isPending }) {
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };

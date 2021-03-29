@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 {{/if}}
 {{#if wantMessages}}
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import { useInjectReducer } from 'utils/injectReducer';
@@ -32,35 +32,35 @@ const key = '{{ camelCase name }}';
 {{/if}}
 
 function {{ properCase name }}() {
-  {{#if wantActionsAndReducer}}
-  useInjectReducer({ key, reducer });
-  {{/if}}
-  {{#if wantSaga}}
-  useInjectSaga({ key, saga });
-  {{/if}}
+{{#if wantActionsAndReducer}}
+useInjectReducer({ key, reducer });
+{{/if}}
+{{#if wantSaga}}
+useInjectSaga({ key, saga });
+{{/if}}
 
-  const dispatch = useDispatch();
-  {{#if wantActionsAndReducer}}
-  const {{ camelCase name }} = useSelector(makeSelect{{properCase name}}());
-  {{/if}}
+const dispatch = useDispatch();
+{{#if wantActionsAndReducer}}
+const {{ camelCase name }} = useSelector(makeSelect{{properCase name}}());
+{{/if}}
 
+{{#if wantMessages}}
+const { t } = useTranslation();
+{{/if}}
+
+return (
+<div>
+  {{#if wantHeaders}}
+  <Helmet>
+    <title>{{properCase name}}</title>
+    <meta name="description" content="Description of {{properCase name}}" />
+  </Helmet>
+  {{/if}}
   {{#if wantMessages}}
-  const { formatMessage } = useIntl();
+  <h1>{t(messages.header)}</h1>
   {{/if}}
-
-  return (
-    <div>
-    {{#if wantHeaders}}
-      <Helmet>
-        <title>{{properCase name}}</title>
-        <meta name="description" content="Description of {{properCase name}}" />
-      </Helmet>
-    {{/if}}
-    {{#if wantMessages}}
-      <h1>{formatMessage(messages.header)}</h1>
-    {{/if}}
-    </div>
-  );
+</div>
+);
 }
 
 export default {{ properCase name }};

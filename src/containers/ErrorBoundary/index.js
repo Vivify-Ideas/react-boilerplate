@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import * as Sentry from '@sentry/browser';
-import messages from './messages';
 
 export class ErrorBoundry extends Component {
   state = {
-    eventId: null
+    eventId: null,
   };
 
   static getDerivedStateFromError(error) {
@@ -14,7 +13,7 @@ export class ErrorBoundry extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    Sentry.withScope(scope => {
+    Sentry.withScope((scope) => {
       scope.setExtras(errorInfo);
       const eventId = Sentry.captureException(error);
       this.setState({ eventId });
@@ -26,33 +25,33 @@ export class ErrorBoundry extends Component {
   };
 
   render() {
+    const { t, fallbackUI, children } = this.props;
+
     if (this.state.hasError) {
       // render fallback UI
 
-      if (this.props.fallbackUI) {
-        return this.props.fallbackUI(this.showReportDialog);
+      if (fallbackUI) {
+        return fallbackUI(this.showReportDialog);
       }
-
-      const { formatMessage } = this.props.intl;
 
       return (
         <div>
-          <h1>{formatMessage(messages.header)}</h1>
+          <h1>{t('error_page.header')}</h1>
           <button onClick={this.showReportDialog}>
-            {formatMessage(messages.reportFeedbackButton)}
+            {t('error_page.button.report_feedback')}
           </button>
-          <a href="/">{formatMessage(messages.backLink)}</a>
+          <a href="/">{t('error_page.link.back')}</a>
         </div>
       );
     }
 
     // when there's not an error, render children untouched
-    return this.props.children;
+    return children;
   }
 }
 
 ErrorBoundry.propTypes = {
-  fallbackUI: PropTypes.func
+  fallbackUI: PropTypes.func,
 };
 
-export default injectIntl(ErrorBoundry);
+export default withTranslation()(ErrorBoundry);

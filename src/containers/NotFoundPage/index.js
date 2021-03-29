@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useIntl } from 'react-intl';
-import messages from './messages';
+import { useTranslation } from 'react-i18next';
 
 export function NotFound() {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -13,8 +12,8 @@ export function NotFound() {
         <title>404 - React Boilerplate</title>
       </Helmet>
       <main>
-        <h1>404 | {formatMessage(messages.header)}</h1>
-        <Link to="/">{formatMessage(messages.backLink)}</Link>
+        <h1>404 | {t('not_found_page.header')}</h1>
+        <Link to="/">{t('not_found_page.link.back')}</Link>
       </main>
     </div>
   );
