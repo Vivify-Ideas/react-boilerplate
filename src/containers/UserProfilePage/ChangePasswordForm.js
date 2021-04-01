@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { changePasswordSchema } from './validations';
-import messages from './messages';
 
 export default function ChangePasswordForm({ onSubmit, isPending }) {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   function handleOnSubmit(values, { setErrors, resetForm }) {
     const { currentPassword, newPassword, newPasswordConfirmation } = values;
@@ -32,48 +31,46 @@ export default function ChangePasswordForm({ onSubmit, isPending }) {
       <Form>
         <div>
           <label htmlFor="currentPassword">
-            {formatMessage(messages.currentPasswordInputLabel)}
+            {t('user_profile.input_label.current_password')}
           </label>
           <Field type="password" name="currentPassword" required />
           <ErrorMessage name="currentPassword">
             {(msg) =>
-              formatMessage(msg, {
-                label: formatMessage(messages.currentPasswordInputLabel),
+              t(msg, {
+                label: t('user_profile.input_label.current_password'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="newPassword">
-            {formatMessage(messages.newPasswordInputLabel)}
+            {t('user_profile.input_label.new_password')}
           </label>
           <Field type="password" name="newPassword" required />
           <ErrorMessage name="newPassword">
             {(msg) =>
-              formatMessage(msg, {
-                label: formatMessage(messages.newPasswordInputLabel),
+              t(msg, {
+                label: t('user_profile.input_label.new_password'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="newPasswordConfirmation">
-            {formatMessage(messages.newPasswordConfirmationInputLabel)}
+            {t('user_profile.input_label.new_password_confirmation')}
           </label>
           <Field type="password" name="newPasswordConfirmation" required />
           <ErrorMessage name="newPasswordConfirmation">
             {(msg) =>
-              formatMessage(msg, {
-                label: formatMessage(messages.newPasswordInputLabel),
-                value: formatMessage(
-                  messages.newPasswordConfirmationInputLabel
-                ),
+              t(msg, {
+                label: t('user_profile.input_label.new_password'),
+                value: t('user_profile.input_label.new_password_confirmation'),
               })
             }
           </ErrorMessage>
         </div>
         <button disabled={isPending} type="submit">
-          {formatMessage(messages.changePasswordButton)}
+          {t('user_profile.button.change_password')}
         </button>
       </Form>
     </Formik>

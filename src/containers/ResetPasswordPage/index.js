@@ -1,11 +1,10 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { makeSelectIsResetPasswordPending } from 'store/auth/selectors';
 import { resetPassword } from 'store/auth/actions';
 import ResetPasswordForm from './ResetPasswordForm';
-import messages from './messages';
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
@@ -17,14 +16,14 @@ export function ResetPasswordPage() {
     [dispatch]
   );
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   return (
     <main>
       <Helmet>
         <title>Reset Password - React Boilerplate</title>
       </Helmet>
-      <h1>{formatMessage(messages.resetPasswordTitle)}</h1>
+      <h1>{t('reset_password_page.text.reset_password_title')}</h1>
       <ResetPasswordForm
         onSubmit={submitResetPasswordForm}
         isPending={isResetPasswordPending}

@@ -28,9 +28,6 @@ import {
   SOCIAL_AUTH_REQUEST,
 } from './actionTypes';
 import { DASHBOARD, LOGIN } from 'routes';
-import messages from 'containers/LoginPage/messages';
-import forgotPasswordMessages from 'containers/ForgotPasswordPage/messages';
-import resetPasswordMessages from 'containers/ResetPasswordPage/messages';
 import parseApiErrorsToFormik from 'utils/parseApiErrorsToFormik';
 import authService from 'services/AuthService';
 import { HTTP_STATUS_CODES } from 'consts';
@@ -48,7 +45,7 @@ export function* authorize({ type, email, password }) {
     if (error.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
       yield put(
         enqueueSnackbar({
-          message: messages.unauthorized,
+          message: 'login_page.unauthorized',
         })
       );
     }
@@ -86,7 +83,7 @@ export function* forgotPassword({ type, email, meta: { setErrors } }) {
     yield put(forgotPasswordSuccess());
     yield put(
       enqueueSnackbar({
-        message: forgotPasswordMessages.resetLinkSent,
+        message: 'forgot_password_page.notifications.reset_link_sent',
       })
     );
   } catch (error) {
@@ -149,7 +146,7 @@ export function* resetPassword({
     yield put(resetPasswordSuccess());
     yield put(
       enqueueSnackbar({
-        message: resetPasswordMessages.passwordReseted,
+        message: 'reset_password_page.notifications.password_reseted',
       })
     );
     yield put(push(LOGIN));

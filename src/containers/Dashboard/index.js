@@ -1,26 +1,29 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useIntl } from 'react-intl';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
-
-const key = 'dashbaord';
+import { useTranslation } from 'react-i18next';
+import { LOCALES } from 'translations';
 
 function Dashboard() {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
+  const { i18n, t } = useTranslation();
 
-  const { formatMessage } = useIntl();
+  const changeLanguage = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
 
   return (
     <main>
       <Helmet>
         <title>Dashboard - React Boilerplate</title>
       </Helmet>
-      <h1>{formatMessage(messages.startProjectHeader)}</h1>
+      <label>{t('dashboard.select_language')}</label>
+      <select value={i18n.language} onChange={changeLanguage}>
+        {LOCALES.map((locale) => (
+          <option value={locale} key={locale}>
+            {locale}
+          </option>
+        ))}
+      </select>
+      <h1>{t('dashboard.header')}</h1>
     </main>
   );
 }

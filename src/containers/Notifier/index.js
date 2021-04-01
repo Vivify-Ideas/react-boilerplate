@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { withSnackbar } from 'notistack';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { makeSelectNotifications } from 'store/notifier/selectors';
 import { removeSnackbar } from 'store/notifier/actions';
 
@@ -12,7 +12,7 @@ export function Notifier({ enqueueSnackbar, closeSnackbar }) {
   const dispatch = useDispatch();
   const notifications = useSelector(makeSelectNotifications());
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!notifications.length) {
@@ -36,7 +36,7 @@ export function Notifier({ enqueueSnackbar, closeSnackbar }) {
             }
             dispatch(removeSnackbar(key));
           },
-          content: (key) => <div id={key}>{formatMessage(message)}</div>,
+          content: (key) => <div id={key}>{t(message)}</div>,
         });
 
         storeDisplayed(key);

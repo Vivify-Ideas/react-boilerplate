@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import {
   makeSelectIsRegisterPending,
@@ -10,7 +10,6 @@ import {
 import { register } from 'store/auth/actions';
 import SocialAuth from 'containers/SocialAuth';
 import RegisterForm from './RegisterForm';
-import messages from './messages';
 import { LOGIN } from 'routes';
 
 function RegisterPage() {
@@ -22,7 +21,7 @@ function RegisterPage() {
     [dispatch]
   );
 
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   const renderPendingIndicator = <div>Please wait...</div>;
 
@@ -31,19 +30,19 @@ function RegisterPage() {
       <Helmet>
         <title>Register - React Boilerplate</title>
       </Helmet>
-      <h1>{formatMessage(messages.registerTitle)}</h1>
+      <h1>{t('register_page.text.register_title')}</h1>
       {!isSocialAuthPending ? (
         <>
           <SocialAuth
-            facebookButtonText={formatMessage(messages.facebookButton)}
-            googleButtonText={formatMessage(messages.googleButton)}
+            facebookButtonText={t('register_page.button.facebook')}
+            googleButtonText={t('register_page.button.google')}
           />
 
           <RegisterForm
             onSubmit={submitRegisterForm}
             isPending={isRegisterPending}
           />
-          <Link to={LOGIN}>{formatMessage(messages.loginLink)}</Link>
+          <Link to={LOGIN}>{t('register_page.link.login')}</Link>
         </>
       ) : (
         renderPendingIndicator

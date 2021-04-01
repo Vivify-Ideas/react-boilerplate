@@ -6,11 +6,10 @@ import * as Sentry from '@sentry/browser';
 import config from 'config';
 import history from 'utils/history';
 import App from 'containers/App';
-import LanguageProvider from 'containers/LanguageProvider';
 import ErrorBoundry from 'containers/ErrorBoundary';
 import configureStore from 'store';
 import * as serviceWorker from 'serviceWorker';
-import { translationMessages } from './i18n';
+import './translations';
 
 const initialState = {};
 const store = configureStore(initialState, history);
@@ -23,40 +22,27 @@ if (config.sentry.key && config.sentry.project) {
   });
 }
 
-const render = (messages) => {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <ErrorBoundry>
-            <App />
-          </ErrorBoundry>
-        </ConnectedRouter>
-      </LanguageProvider>
+      <ConnectedRouter history={history}>
+        <ErrorBoundry>
+          <App />
+        </ErrorBoundry>
+      </ConnectedRouter>
     </Provider>,
     MOUNT_NODE
   );
 };
 
 if (module.hot) {
-  module.hot.accept(['./i18n', 'containers/App'], () => {
+  module.hot.accept(['translations', 'containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    render(translationMessages);
+    render();
   });
 }
 
-if (!window.Intl) {
-  new Promise((resolve) => {
-    resolve(import('intl'));
-  })
-    .then(() => Promise.all([import('intl/locale-data/jsonp/en.js')]))
-    .then(() => render(translationMessages))
-    .catch((err) => {
-      throw err;
-    });
-} else {
-  render(translationMessages);
-}
+render();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

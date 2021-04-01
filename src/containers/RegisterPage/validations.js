@@ -1,10 +1,10 @@
 import Yup from 'utils/validations';
 
 export const registerSchema = Yup.object().shape({
-  firstName: Yup.string().required(),
-  lastName: Yup.string().required(),
+  firstName: Yup.string().required('global.validations.required'),
+  lastName: Yup.string().required('global.validations.required'),
   email: Yup.string()
-    .email()
-    .required(),
-  password: Yup.string().required()
+    .email('global.validations.email')
+    .required('global.validations.required'),
+  password: Yup.string().required('global.validations.required'),
 });

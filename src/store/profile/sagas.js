@@ -11,7 +11,6 @@ import {
 } from './actions';
 import { startAction, stopAction } from '../loading/actions';
 import { UPDATE_USER_REQUEST, CHANGE_PASSWORD_REQUEST } from './actionTypes';
-import messages from 'containers/UserProfilePage/messages';
 import profileService from 'services/ProfileService';
 import { HTTP_STATUS_CODES } from 'consts';
 
@@ -37,7 +36,7 @@ export function* updateUser({
     yield put(updateUserSuccess());
     yield put(
       enqueueSnackbar({
-        message: messages.profileUpdated,
+        message: 'user_profile.notification.profile_update',
       })
     );
   } catch (error) {
@@ -68,7 +67,7 @@ export function* changePassword({
     yield call(resetForm);
     yield put(
       enqueueSnackbar({
-        message: messages.passwordChanged,
+        message: 'user_profile.notification.password_changed',
       })
     );
   } catch (error) {

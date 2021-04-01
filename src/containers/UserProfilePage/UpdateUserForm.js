@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { updateUserSchema } from './validations';
-import messages from './messages';
 import ImageField from './ImageField';
 
 export default function UpdateUserForm({ user, onSubmit, isPending }) {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   function handleOnSubmit(values, { setErrors }) {
     const { firstName, lastName, avatar } = values;
@@ -19,7 +18,7 @@ export default function UpdateUserForm({ user, onSubmit, isPending }) {
       initialValues={{
         firstName: user.firstName || '',
         lastName: user.lastName || '',
-        avatar: user.avatar || null
+        avatar: user.avatar || null,
       }}
       validationSchema={updateUserSchema}
       onSubmit={handleOnSubmit}
@@ -34,32 +33,32 @@ export default function UpdateUserForm({ user, onSubmit, isPending }) {
           />
           <div>
             <label htmlFor="firstName">
-              {formatMessage(messages.firstNameInputLabel)}
+              {t('user_profile.input_label.first_name')}
             </label>
             <Field type="text" name="firstName" required autoFocus />
             <ErrorMessage name="firstName">
-              {msg =>
-                formatMessage(msg, {
-                  label: formatMessage(messages.firstNameInputLabel)
+              {(msg) =>
+                t(msg, {
+                  label: t('user_profile.input_label.first_name'),
                 })
               }
             </ErrorMessage>
           </div>
           <div>
             <label htmlFor="lastName">
-              {formatMessage(messages.lastNameInputLabel)}
+              {t('user_profile.input_label.last_name')}
             </label>
             <Field type="text" name="lastName" required />
             <ErrorMessage name="lastName">
-              {msg =>
-                formatMessage(msg, {
-                  label: formatMessage(messages.lastNameInputLabel)
+              {(msg) =>
+                t(msg, {
+                  label: t('user_profile.input_label.last_name'),
                 })
               }
             </ErrorMessage>
           </div>
           <button disabled={isPending} type="submit">
-            {formatMessage(messages.updateButton)}
+            {t('user_profile.button.update')}
           </button>
         </Form>
       )}
@@ -70,5 +69,5 @@ export default function UpdateUserForm({ user, onSubmit, isPending }) {
 UpdateUserForm.propTypes = {
   user: PropTypes.object,
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };

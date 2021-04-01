@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerSchema } from './validations';
-import messages from './messages';
 
 export default function RegisterForm({ onSubmit, isPending }) {
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   const handleOnSubmit = (values, { setErrors }) => {
     const { firstName, lastName, email, password } = values;
@@ -19,7 +18,7 @@ export default function RegisterForm({ onSubmit, isPending }) {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
       }}
       validationSchema={registerSchema}
       onSubmit={handleOnSubmit}
@@ -27,58 +26,56 @@ export default function RegisterForm({ onSubmit, isPending }) {
       <Form>
         <div>
           <label htmlFor="firstName">
-            {formatMessage(messages.firstNameInputLabel)}
+            {t('register_page.input_label.first_name')}
           </label>
           <Field type="text" name="firstName" required autoFocus />
           <ErrorMessage name="firstName">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.firstNameInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('register_page.input_label.first_name'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="lastName">
-            {formatMessage(messages.lastNameInputField)}
+            {t('register_page.input_label.last_name')}
           </label>
           <Field type="text" name="lastName" required />
           <ErrorMessage name="lastName">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.lastNameInputField)
+            {(msg) =>
+              t(msg, {
+                label: t('register_page.input_label.last_name'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
-          <label htmlFor="email">
-            {formatMessage(messages.emailInputLabel)}
-          </label>
+          <label htmlFor="email">{t('register_page.input_label.email')}</label>
           <Field type="email" name="email" required />
           <ErrorMessage name="email">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.emailInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('register_page.input_label.email'),
               })
             }
           </ErrorMessage>
         </div>
         <div>
           <label htmlFor="password">
-            {formatMessage(messages.passwordInputLabel)}
+            {t('register_page.input_label.password')}
           </label>
           <Field type="password" name="password" required />
           <ErrorMessage name="password">
-            {msg =>
-              formatMessage(msg, {
-                label: formatMessage(messages.passwordInputLabel)
+            {(msg) =>
+              t(msg, {
+                label: t('register_page.input_label.password'),
               })
             }
           </ErrorMessage>
         </div>
         <button disabled={isPending} type="submit">
-          {formatMessage(messages.registerButton)}
+          {t('register_page.button.register')}
         </button>
       </Form>
     </Formik>
@@ -87,5 +84,5 @@ export default function RegisterForm({ onSubmit, isPending }) {
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
-  isPending: PropTypes.bool
+  isPending: PropTypes.bool,
 };

@@ -1,0 +1,132 @@
+{
+  "app_bar": {
+    "link": {
+      "logout": "Logout",
+      "notifications": "Notifications",
+      "profile": "Profile"
+    }
+  },
+  "dashboard": {
+    "header": "Starten Sie Ihr nächstes React-Projekt in Sekunden",
+    "select_language": "Sprache auswählen"
+  },
+  "error_page": {
+    "header": "This is embarrassing 🤦‍",
+    "button": {
+      "report_feedback": "Report feedback"
+    },
+    "link": {
+      "back": "Go back"
+    }
+  },
+  "forgot_password_page": {
+    "text": {
+      "forgot_password_title": "Forgot Password"
+    },
+    "button": {
+      "reset_password": "Reset password"
+    },
+    "input_label": {
+      "email": "Email Address"
+    },
+    "notifications": {
+      "reset_link_sent": "Password reset link sent"
+    }
+  },
+  "global": {
+    "session_expired": "Your session has expired",
+    "validations": {
+      "email": "{{ label }} must be a valid email",
+      "one_of": "{{ label }} must match with {{ value }}",
+      "required": "{{ label }} is required"
+    }
+  },
+  "login_page": {
+    "text": {
+      "login_title": "Login"
+    },
+    "input_label": {
+      "email": "Email Adress",
+      "password": "Password"
+    },
+    "button": {
+      "facebook": "Login with Facebook",
+      "google": "Login with Google",
+      "login": "Login"
+    },
+    "link": {
+      "register": "Don't have an account? Register",
+      "forgot_password": "Forgot password?"
+    },
+    "unauthorized": "Unauthorized"
+  },
+  "not_found_page": {
+    "header": "Page not found.",
+    "link": {
+      "back": "Go back"
+    }
+  },
+  "register_page": {
+    "text": {
+      "register_title": "Register"
+    },
+    "button": {
+      "facebook": "Register with Facebook",
+      "google": "Register with Google",
+      "register": "Register"
+    },
+    "input_label": {
+      "email": "Email Address",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "password": "Password"
+    },
+    "link": {
+      "login": "Already have an account? Login"
+    }
+  },
+  "reset_password_page": {
+    "text": {
+      "reset_password_title": "Reset Password"
+    },
+    "notifications": {
+      "password_reseted": "You can now login with new password"
+    },
+    "input_label": {
+      "password": "Password",
+      "password_confirmation": "Password Confirmation"
+    },
+    "button": {
+      "reset_password": "Reset password"
+    }
+  },
+  "user_profile": {
+    "text": {
+      "update_user_header": "Update Profile"
+    },
+    "button": {
+      "change_password": "Change Password",
+      "update": "Update"
+    },
+    "input_label": {
+      "current_password": "Current Password",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "new_password": "New Password",
+      "new_password_confirmation": "New Password Confirmation"
+    },
+    "notification": {
+      "profile_update": "Profile information succefully updated",
+      "password_changed": "Password succefully changed"
+    }
+  },
+  "welcome_page": {
+    "heading": "Vivify Ideas React Boilerplate",
+    "subheading": "We are Vivify Ideas, a web development company and home of extraordinary developers.",
+    "link": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "built_with_love": "Built with love by the {{ team }} team."
+  }
+}
