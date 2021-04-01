@@ -14,7 +14,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@sentry/browser": "^5.20.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "connected-react-router": "^6.8.0",
     "deepstream.io-client-js": "^2.3.4",
     "formik": "^2.1.5",
