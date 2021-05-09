@@ -24,7 +24,7 @@
     "invariant": "^2.2.4",
     "jwt-decode": "^2.2.0",
     "lint-staged": "^10.2.11",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "notistack": "^0.9.17",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
