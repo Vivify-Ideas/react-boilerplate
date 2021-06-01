@@ -1,0 +1,53 @@
+{
+  "login_page": {
+    "text": {
+      "login_title": "Prijavi se"
+    },
+    "input_label": {
+      "email": "Email",
+      "password": "Lozinka"
+    },
+    "validations": {
+      "email": "Email adresa nije validna",
+      "password": "Unos lozinke je obavezan"
+    },
+    "button": {
+      "login": "Prijavi se"
+    },
+    "link": {
+      "register": "Nemas nalog? Kreiraj"
+    },
+    "unauthorized": "Kredencijali nisu validni"
+  },
+  "signup_page": {
+    "text": {
+      "register_title": "Kreiraj nalog"
+    },
+    "validations": {
+      "email": "Email adresa nije validna",
+      "password": "Unos lozinke je obavezan",
+      "first_name": "Unos imena je obavezan",
+      "last_name": "Unos prezimena je obavezan",
+      "user_already_registered": "Korisnik sa datom email adresom je vec registrovan."
+    },
+    "button": {
+      "register": "Potvrdi"
+    },
+    "input_label": {
+      "email": "Email",
+      "first_name": "Ime",
+      "last_name": "Prezime",
+      "password": "Lozinka"
+    },
+    "link": {
+      "login": "Vec imas nalog? Prijavi se"
+    }
+  },
+  "welcome_page": {
+    "heading": "Vivify Ideas React Boilerplate",
+    "subheading": "Vivify Ideas - mesto gde ideje ozivljavaju. :)",
+    "link": {
+      "logout": "Odjavi se"
+    }
+  }
+}

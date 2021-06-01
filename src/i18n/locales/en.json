@@ -1,0 +1,53 @@
+{
+  "login_page": {
+    "text": {
+      "login_title": "Login"
+    },
+    "input_label": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "validations": {
+      "email": "Please enter valid email address",
+      "password": "Password is required"
+    },
+    "button": {
+      "login": "Login"
+    },
+    "link": {
+      "register": "Don't have an account? Register"
+    },
+    "unauthorized": "Please enter valid credentials"
+  },
+  "signup_page": {
+    "text": {
+      "register_title": "Register"
+    },
+    "validations": {
+      "email": "Please enter valid email address",
+      "password": "Password is required",
+      "first_name": "First name is required",
+      "last_name": "Last name is required",
+      "user_already_registered": "User with provided email already exists."
+    },
+    "button": {
+      "register": "Sign Up"
+    },
+    "input_label": {
+      "email": "Email",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "password": "Password"
+    },
+    "link": {
+      "login": "Already have an account? Login"
+    }
+  },
+  "welcome_page": {
+    "heading": "Vivify Ideas React Boilerplate",
+    "subheading": "We are Vivify Ideas, a web development company and home of extraordinary developers.",
+    "link": {
+      "logout": "Logout"
+    }
+  }
+}
