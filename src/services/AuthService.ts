@@ -13,7 +13,10 @@ const ENDPOINTS = {
   LOGIN: '/api/v1/token/',
   ME: '/api/v1/users/me/',
   TOKEN_REFRESH: '/api/v1/token/refresh/',
-  REGISTER: '/api/v1/users/'
+  REGISTER: '/api/v1/users/',
+  START_PASSWORD_RECOVERY: '/api/v1/password_reset/',
+  VALIDATE_PASSWORD_RECOVERY_TOKEN: '/api/v1/password_reset/validate_token/',
+  CONFIRM_PASSWORD_RECOVERY: '/api/v1/password_reset/confirm/'
 }
 
 class AuthService {
@@ -105,6 +108,31 @@ class AuthService {
 
     return token
   }
+
+  startPasswordRecovery = (data: { email: string }) =>
+    this.httpService.request({
+      url: ENDPOINTS.START_PASSWORD_RECOVERY,
+      method: HTTP_METHODS.POST,
+      data
+    })
+
+  validatePasswordRecoveryToken = (data: { token: string }) =>
+    this.httpService.request({
+      url: ENDPOINTS.VALIDATE_PASSWORD_RECOVERY_TOKEN,
+      method: HTTP_METHODS.POST,
+      data
+    })
+
+  confirmPasswordRecovery = (data: {
+    password: string
+    password_confirmation: string
+    token: string
+  }) =>
+    this.httpService.request({
+      url: ENDPOINTS.CONFIRM_PASSWORD_RECOVERY,
+      method: HTTP_METHODS.POST,
+      data
+    })
 
   destroySession = () => {
     removeItem('access_token')

@@ -12,6 +12,7 @@ Boilerplate generated with [Vite ⚡️](https://vitejs.dev/)
 
 - Login
 - Register
+- Password Recovery
 - Welcome page
 - Private/Public Routes
 - Refresh Token
@@ -40,3 +41,5 @@ building for production...
 [write] my-lib.es.js 0.08kb, brotli: 0.07kb
 [write] my-lib.umd.js 0.30kb, brotli: 0.16kb
 ```
+
+Older boilerplate version: https://github.com/Vivify-Ideas/react-boilerplate/tree/v1

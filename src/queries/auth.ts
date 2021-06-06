@@ -37,6 +37,15 @@ export const useRegisterMutation = () => {
   })
 }
 
+export const useStartPasswordRecoveryMutation = () =>
+  useMutation(authService.startPasswordRecovery)
+
+export const useValidatePasswordRecoveryTokenMutation = () =>
+  useMutation(authService.validatePasswordRecoveryToken)
+
+export const useConfirmPasswordRecoveryMutation = () =>
+  useMutation(authService.confirmPasswordRecovery)
+
 export const useLogoutMutation = () => {
   const queryClient = useQueryClient()
 

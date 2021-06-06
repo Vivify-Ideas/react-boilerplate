@@ -4,10 +4,10 @@ import { initReactI18next } from 'react-i18next'
 import translationEn from './locales/en.json'
 import translationSr from './locales/sr.json'
 
-const LOCALE_ENG = 'en'
+const LOCALE_EN = 'en'
 const LOCALE_SR = 'sr'
 
-export const LOCALES = [LOCALE_ENG, LOCALE_SR]
+export const LOCALES = [LOCALE_EN, LOCALE_SR]
 
 export const DEFAULT_LOCALE = LOCALE_SR
 

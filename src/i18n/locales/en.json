@@ -1,46 +1,52 @@
 {
-  "login_page": {
-    "text": {
-      "login_title": "Login"
-    },
-    "input_label": {
-      "email": "Email",
-      "password": "Password"
-    },
+  "common": {
+    "project_title": "VIVIFY IDEAS",
+    "submit": "Submit",
+    "email": "Email",
+    "email_placeholder": "Enter Email",
+    "password": "Password",
+    "password_placeholder": "Enter Password",
     "validations": {
       "email": "Please enter valid email address",
       "password": "Password is required"
     },
-    "button": {
-      "login": "Login"
-    },
+    "login": "Login",
+    "oops": "Oops! Something went wrong."
+  },
+  "login_page": {
     "link": {
-      "register": "Don't have an account? Register"
+      "register": "Don't have an account? Register",
+      "password_recovery": "Forgot Password?"
     },
     "unauthorized": "Please enter valid credentials"
   },
   "signup_page": {
-    "text": {
-      "register_title": "Register"
-    },
-    "validations": {
-      "email": "Please enter valid email address",
-      "password": "Password is required",
-      "first_name": "First name is required",
-      "last_name": "Last name is required",
-      "user_already_registered": "User with provided email already exists."
-    },
+    "title": "Sign Up",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "first_name_placeholder": "Enter First Name",
+    "last_name_placeholder": "Enter Last Name",
+    "first_name_required": "First name is required",
+    "last_name_required": "Last name is required",
+    "user_already_registered_validation": "User with provided email already exists.",
     "button": {
       "register": "Sign Up"
     },
-    "input_label": {
-      "email": "Email",
-      "first_name": "First Name",
-      "last_name": "Last Name",
-      "password": "Password"
-    },
     "link": {
       "login": "Already have an account? Login"
+    }
+  },
+  "password_recovery": {
+    "title": "Password Recovery",
+    "success_message": "We have sent an email with a confirmation link to your email address. If you do not receive a confirmation email, please check your spam folder.",
+    "error_message": "Please verify that you entered a valid email address.",
+    "last_step": {
+      "title": "Set up a new password",
+      "confirmation_password": "Confirmation Password",
+      "confirmation_password_placeholder": "Enter Confirmation Password",
+      "confirmation_password_matching_issue": "Passwords don't match",
+      "confirmation_password_required": "Confirmation Password is required",
+      "success_message": "Password has been updated successfully."
     }
   },
   "welcome_page": {
