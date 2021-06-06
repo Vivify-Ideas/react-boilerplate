@@ -1,46 +1,52 @@
 {
-  "login_page": {
-    "text": {
-      "login_title": "Prijavi se"
-    },
-    "input_label": {
-      "email": "Email",
-      "password": "Lozinka"
-    },
+  "common": {
+    "project_title": "VIVIFY IDEAS",
+    "submit": "Potvrdi",
+    "email": "Email",
+    "email_placeholder": "Unesi email",
+    "password": "Lozinka",
+    "password_placeholder": "Unesi lozinku",
     "validations": {
       "email": "Email adresa nije validna",
-      "password": "Unos lozinke je obavezan"
+      "password": "Lozinka je obavezno polje"
     },
-    "button": {
-      "login": "Prijavi se"
-    },
+    "login": "Prijavi se",
+    "oops": "Oops! Nesto je pošlo po zlu..."
+  },
+  "login_page": {
     "link": {
-      "register": "Nemas nalog? Kreiraj"
+      "register": "Nemas nalog? Kreiraj",
+      "password_recovery": "Zaboravljena lozinka?"
     },
-    "unauthorized": "Kredencijali nisu validni"
+    "unauthorized": "Uneti kredencijali nisu validni. Molim vas pokušajte ponovo sa validnim kredencijalima."
   },
   "signup_page": {
-    "text": {
-      "register_title": "Kreiraj nalog"
-    },
-    "validations": {
-      "email": "Email adresa nije validna",
-      "password": "Unos lozinke je obavezan",
-      "first_name": "Unos imena je obavezan",
-      "last_name": "Unos prezimena je obavezan",
-      "user_already_registered": "Korisnik sa datom email adresom je vec registrovan."
-    },
+    "title": "Kreiraj nalog",
+    "first_name": "Ime",
+    "last_name": "Prezime",
+    "first_name_placeholder": "Unesi ime",
+    "last_name_placeholder": "Unesi prezime",
+    "first_name_required": "Ime je obavezno polje",
+    "last_name_required": "Prezime je obavezno polje",
+    "user_already_registered_validation": "Korisnik sa datom email adresom vec postoji.",
     "button": {
       "register": "Potvrdi"
     },
-    "input_label": {
-      "email": "Email",
-      "first_name": "Ime",
-      "last_name": "Prezime",
-      "password": "Lozinka"
-    },
     "link": {
-      "login": "Vec imas nalog? Prijavi se"
+      "login": "Već imaš nalog? Prijavi se"
+    }
+  },
+  "password_recovery": {
+    "title": "Zaboravljena lozinka?",
+    "success_message": "Poslali smo vam email sa konfirmacionim linkom. Ukoliko niste dobili email proverite spam folder.",
+    "error_message": "Korisnika sa datom email adresom nismo našli u sistemu",
+    "last_step": {
+      "title": "Postavi novu lozinku",
+      "confirmation_password": "Konfirmaciona lozinka",
+      "confirmation_password_placeholder": "Unesi konfirmacionu lozinku",
+      "confirmation_password_matching_issue": "Lozinke se ne poklapaju",
+      "confirmation_password_required": "Konfirmaciona lozinka je obavezno polje",
+      "success_message": "Lozinka je uspešno promenjena"
     }
   },
   "welcome_page": {

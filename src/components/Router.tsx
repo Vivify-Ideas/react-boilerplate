@@ -1,7 +1,12 @@
 import loadable from '@loadable/component'
 import React from 'react'
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom'
-import { HOME_PAGE, LOGIN_PAGE, SIGNUP_PAGE } from '../constants'
+import {
+  PASSWORD_RECOVERY,
+  HOME_PAGE,
+  LOGIN_PAGE,
+  SIGNUP_PAGE
+} from '../constants'
 import useAuth from './../hooks/useAuth'
 
 type AsyncRouteProps = RouteProps & { importPath: () => Promise<any> }
@@ -35,6 +40,11 @@ export default function Router(): JSX.Element {
         exact
         path={SIGNUP_PAGE}
         importPath={() => import('./../pages/SignUpPage')}
+      />
+      <AsyncRoute
+        exact
+        path={PASSWORD_RECOVERY}
+        importPath={() => import('./../pages/PasswordRecoveryPage')}
       />
     </Switch>
   )

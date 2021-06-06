@@ -12,6 +12,7 @@ Boilerplate generated with [Vite ⚡️](https://vitejs.dev/)
 
 - Login
 - Register
+- Password Recovery
 - Welcome page
 - Private/Public Routes
 - Refresh Token

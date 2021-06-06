@@ -1,8 +1,7 @@
-import { Container } from '@chakra-ui/layout'
-import { Button, Divider, Heading } from '@chakra-ui/react'
+import { Button, Container, Divider, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import useAuth from './../../hooks/useAuth'
+import useAuth from './../hooks/useAuth'
 
 export default function HomePage(): JSX.Element {
   const { user, logout } = useAuth()

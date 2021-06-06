@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter } from 'react-router-dom'
 import { theme } from '../theme'
 import { AuthProvider } from './../hooks/useAuth'
@@ -17,6 +18,7 @@ export default function App(): JSX.Element {
             <Router />
           </AuthProvider>
         </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
       </ChakraProvider>
     </QueryClientProvider>
   )
