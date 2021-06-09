@@ -11,11 +11,14 @@
       "password": "Lozinka je obavezno polje"
     },
     "login": "Prijavi se",
-    "oops": "Oops! Nesto je pošlo po zlu..."
+    "oops": "Oops! Nesto je pošlo po zlu...",
+    "settings": "Podešavanja",
+    "logout": "Odjavi se",
+    "preview": "Pregled"
   },
   "login_page": {
     "link": {
-      "register": "Nemas nalog? Kreiraj",
+      "register": "Nemaš nalog? Kreiraj",
       "password_recovery": "Zaboravljena lozinka?"
     },
     "unauthorized": "Uneti kredencijali nisu validni. Molim vas pokušajte ponovo sa validnim kredencijalima."

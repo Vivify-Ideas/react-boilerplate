@@ -17,6 +17,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
+import Logo from '../components/Layout/Logo'
 import { PASSWORD_RECOVERY, SIGNUP_PAGE } from '../constants'
 import useAuth from '../hooks/useAuth'
 
@@ -31,14 +32,12 @@ export default function LoginPage(): JSX.Element {
       align="center"
       justifyContent="center"
       direction="column"
-    >
-      <Heading color="green.500" size="xl" mb={6} fontWeight="normal">
-        {t('common.project_title')}
-      </Heading>
+    >      
+      <Logo mb={10} />
       <Heading size="md" mb={12}>
         {t('common.login')}
       </Heading>
-      <Box p={8} w="md" borderRadius={8}>
+      <Box p={8} w={['xs', 'md']} borderRadius={8}>
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={login}

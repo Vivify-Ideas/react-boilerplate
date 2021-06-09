@@ -18,6 +18,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 import { useStartPasswordRecoveryMutation } from '../../queries/auth'
+import Logo from '../Layout/Logo'
 
 export default function PasswordRecoveryInitialStep(): JSX.Element {
   const { t } = useTranslation()
@@ -36,13 +37,11 @@ export default function PasswordRecoveryInitialStep(): JSX.Element {
       justifyContent="center"
       direction="column"
     >
-      <Heading color="green.500" size="xl" mb={6} fontWeight="normal">
-        {t('common.project_title')}
-      </Heading>
+      <Logo mb={10} />
       <Heading size="md" mb={12}>
         {t('password_recovery.title')}
       </Heading>
-      <Box p={8} w="md" borderRadius={8}>
+      <Box p={8} w={['xs', 'md']} borderRadius={8}>
         <Formik
           initialValues={{ email: '' }}
           onSubmit={values => startPasswordRecovery(values)}

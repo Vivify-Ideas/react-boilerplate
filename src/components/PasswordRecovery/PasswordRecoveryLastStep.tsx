@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { LOGIN_PAGE } from '../../constants'
 import { useConfirmPasswordRecoveryMutation } from '../../queries/auth'
+import Logo from '../Layout/Logo'
 
 export default function PasswordRecoveryLastStep({
   token
@@ -42,13 +43,11 @@ export default function PasswordRecoveryLastStep({
       justifyContent="center"
       direction="column"
     >
-      <Heading color="green.500" size="xl" mb={6} fontWeight="normal">
-        {t('common.project_title')}
-      </Heading>
+      <Logo mb={10} />
       <Heading size="md" mb={12}>
         {t('password_recovery.last_step.title')}
       </Heading>
-      <Box p={8} w="md" borderRadius={8}>
+      <Box p={8} w={['xs', 'md']} borderRadius={8}>
         {isSuccess && (
           <>
             <Text color="green.500" textAlign="center">

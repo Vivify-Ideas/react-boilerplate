@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -11,6 +11,8 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@loadable/component": "^5.15.0",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@sentry/react": "^6.5.0",
     "axios": "^0.21.1",
     "chakra-formik-experiment": "^0.2.0",

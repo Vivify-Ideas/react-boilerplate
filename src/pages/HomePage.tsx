@@ -11,10 +11,6 @@ export default function HomePage(): JSX.Element {
     <Container>
       <Heading>{t('welcome_page.heading')}</Heading>
       <Heading size="md">{t('welcome_page.subheading')}</Heading>
-
-      <Divider width="full" mt={4} mb={4} />
-
-      <Button onClick={logout}>{t('welcome_page.link.logout')}</Button>
     </Container>
   )
 }

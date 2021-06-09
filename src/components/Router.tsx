@@ -2,28 +2,36 @@ import loadable from '@loadable/component'
 import React from 'react'
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom'
 import {
-  PASSWORD_RECOVERY,
   HOME_PAGE,
   LOGIN_PAGE,
+  PASSWORD_RECOVERY,
   SIGNUP_PAGE
 } from '../constants'
 import useAuth from './../hooks/useAuth'
 
 type AsyncRouteProps = RouteProps & { importPath: () => Promise<any> }
 
-function AsyncRoute({ importPath, ...props }: AsyncRouteProps) {
+const AsyncRoute = ({ importPath, ...props }: AsyncRouteProps) => {
   return <Route {...props} component={loadable(importPath)} />
 }
 
-function AuthenticatedRoute(props: AsyncRouteProps) {
+const AuthenticatedRoute = (props: AsyncRouteProps) => {
   const { user } = useAuth()
 
-  if (!user) return <Redirect to="/login" />
+  if (!user) return <Redirect to={LOGIN_PAGE} />
 
   return <AsyncRoute {...props} />
 }
 
-export default function Router(): JSX.Element {
+const GuestRoute = (props: AsyncRouteProps) => {
+  const { user } = useAuth()
+
+  if (user) return <Redirect to={HOME_PAGE} />
+
+  return <AsyncRoute {...props} />
+}
+
+export const Router = (): JSX.Element => {
   return (
     <Switch>
       <AuthenticatedRoute
@@ -31,17 +39,17 @@ export default function Router(): JSX.Element {
         path={HOME_PAGE}
         importPath={() => import('./../pages/HomePage')}
       />
-      <AsyncRoute
+      <GuestRoute
         exact
         path={LOGIN_PAGE}
         importPath={() => import('./../pages/LoginPage')}
       />
-      <AsyncRoute
+      <GuestRoute
         exact
         path={SIGNUP_PAGE}
         importPath={() => import('./../pages/SignUpPage')}
       />
-      <AsyncRoute
+      <GuestRoute
         exact
         path={PASSWORD_RECOVERY}
         importPath={() => import('./../pages/PasswordRecoveryPage')}
@@ -49,3 +57,5 @@ export default function Router(): JSX.Element {
     </Switch>
   )
 }
+
+export default Router

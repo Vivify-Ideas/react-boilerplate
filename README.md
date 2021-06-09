@@ -33,6 +33,15 @@ $ yarn && yarn dev
 
 ## Building for Production
 
+```sh
+$ yarn build
+```
+
+By default `production` mode is used during the build process if the argument `--mode staging` isn't passed.
+
+Make sure that `.env.{mode}` file is available during the build with required env variables.
+
+
 More details https://vitejs.dev/guide/build.html
 
 ```sh
@@ -42,4 +51,5 @@ building for production...
 [write] my-lib.umd.js 0.30kb, brotli: 0.16kb
 ```
 
-Older boilerplate version: https://github.com/Vivify-Ideas/react-boilerplate/tree/v1
+Old boilerplate version can be found on this branch:
+https://github.com/Vivify-Ideas/react-boilerplate/tree/v1

@@ -11,7 +11,10 @@
       "password": "Password is required"
     },
     "login": "Login",
-    "oops": "Oops! Something went wrong."
+    "oops": "Oops! Something went wrong.",
+    "settings": "Settings",
+    "logout": "Logout",
+    "preview": "Preview"
   },
   "login_page": {
     "link": {
