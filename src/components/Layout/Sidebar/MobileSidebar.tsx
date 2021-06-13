@@ -28,11 +28,11 @@ export const MobileSidebar = () => {
           <Stack spacing={2} fontSize="sm">
             <DrawerCloseButton />
 
-            {SIDEBAR_ROUTES.map((props, rid) => (
+            {SIDEBAR_ROUTES.map((route, rid) => (
               <NavItem
                 key={`nav-item-${rid}`}
-                active={router.pathname === props.href}
-                {...props}
+                active={router.pathname === route.href}
+                {...route}
               />
             ))}
             <SectionDivider />

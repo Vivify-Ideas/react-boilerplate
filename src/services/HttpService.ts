@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { config } from './../config'
 
 export class HttpService {
@@ -22,7 +22,7 @@ export class HttpService {
       (key: string | number) => delete this.httpClient.defaults.headers[key]
     )
 
-  setUnauthorizedCallback = (callback: (() => void) | undefined) =>
+  setUnauthorizedCallback = (callback: () => void) =>
     (this.unauthorizedCallback = callback)
 
   addRequestInterceptor = (
@@ -39,9 +39,10 @@ export class HttpService {
   addResponseInterceptors = (
     successCallback:
       | ((
-          value: AxiosResponse<any>
-        ) => AxiosResponse<any> | Promise<AxiosResponse<any>>)
+          value: AxiosResponse<unknown>
+        ) => AxiosResponse<unknown> | Promise<AxiosResponse<unknown>>)
       | undefined,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     errorCallback: ((error: any) => any) | undefined
   ) => this.httpClient.interceptors.response.use(successCallback, errorCallback)
 

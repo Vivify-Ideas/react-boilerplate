@@ -42,7 +42,9 @@ const ActionsList = (props: StackProps) => {
 
 export default Actions
 
-const ActionsButton = (props: IconButtonProps | any) => {
+const ActionsButton = (
+  props: Omit<IconButtonProps, 'aria-label'> & { isOpen: boolean }
+) => {
   const { isOpen, ...rest } = props
   const icon = isOpen ? Menu : MenuOpen
   return (
@@ -51,10 +53,10 @@ const ActionsButton = (props: IconButtonProps | any) => {
       colorScheme="brand"
       variant="ghost"
       fontSize="2xl"
-      aria-label="Toggle Actions"
       icon={<Icon as={icon} />}
       transition="all .4s ease-in-out"
       {...rest}
+      aria-label="Toggle Actions"
     />
   )
 }

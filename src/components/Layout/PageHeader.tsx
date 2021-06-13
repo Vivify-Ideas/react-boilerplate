@@ -11,7 +11,7 @@ const PageHeader: React.FC & PageHeader = ({ children }: JustChild) => {
   const getChild = (type: string) =>
     React.Children.map(
       children,
-      (child: any) => child.type.name === type && child
+      child => (child as { type: { name: string } }).type.name === type && child
     )
   return (
     <Flex w="full" direction="column">

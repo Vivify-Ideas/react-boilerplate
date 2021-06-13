@@ -1,4 +1,4 @@
-import loadable from '@loadable/component'
+import loadable, { DefaultComponent } from '@loadable/component'
 import React from 'react'
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom'
 import {
@@ -9,7 +9,9 @@ import {
 } from '../constants'
 import useAuth from './../hooks/useAuth'
 
-type AsyncRouteProps = RouteProps & { importPath: () => Promise<any> }
+type AsyncRouteProps = RouteProps & {
+  importPath: <T>(props: T) => Promise<DefaultComponent<T>>
+}
 
 const AsyncRoute = ({ importPath, ...props }: AsyncRouteProps) => {
   return <Route {...props} component={loadable(importPath)} />

@@ -14,6 +14,7 @@ export const NavContext = createContext<
   | { isOpen?: boolean; onClose: () => void; onToggle: () => void }
 >({ isOpen: false, onClose: () => {}, onToggle: () => {} })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DefaultLayout = ({ children }: any) => {
   const { user } = useAuth()
   const sidebarState = useDisclosure()

@@ -1,8 +1,9 @@
 import { BoxProps } from '@chakra-ui/react'
 import { mode } from './modes'
 
-type layerStyles = Record<string, BoxProps | any>
-export const layerStyles: layerStyles = {
+type layerStylesProp = Record<string, BoxProps | unknown>
+
+export const layerStyles: layerStylesProp = {
   card: {
     ...mode('bg', 'white', 'whiteAlpha.200')
   },

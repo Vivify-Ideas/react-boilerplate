@@ -1,5 +1,5 @@
 import { Divider, Spacer, Stack } from '@chakra-ui/layout'
-import { ExitToApp, SettingsOutlined } from '@material-ui/icons'
+import { ExitToApp } from '@material-ui/icons'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
@@ -29,11 +29,11 @@ const Sidebar = () => {
       display={['none', '', 'initial']}
       overflowX={isOpen ? 'initial' : 'clip'}
     >
-      {SIDEBAR_ROUTES.map((props, rid) => (
+      {SIDEBAR_ROUTES.map((route, rid) => (
         <NavAction
           key={`nav-item-${rid}`}
-          active={router.pathname === props.href}
-          {...props}
+          active={router.pathname === route.href}
+          {...route}
         />
       ))}
       <Spacer />

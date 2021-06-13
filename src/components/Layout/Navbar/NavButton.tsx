@@ -1,9 +1,9 @@
-import { Icon, IconButton, StackProps } from '@chakra-ui/react'
+import { Icon, IconButton } from '@chakra-ui/react'
 import { MenuOpen, Menu } from '@material-ui/icons'
 import React, { useContext } from 'react'
 import { NavContext } from '..'
 
-const NavButton = (props: StackProps) => {
+const NavButton = () => {
   const { onToggle, isOpen } = useContext(NavContext)
   const icon = isOpen ? Menu : MenuOpen
   return (

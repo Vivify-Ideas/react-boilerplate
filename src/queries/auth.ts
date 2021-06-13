@@ -23,7 +23,7 @@ export const useLoginMutation = () => {
   const queryClient = useQueryClient()
   const history = useHistory()
   return useMutation(authService.login, {
-    onSuccess: async _data => {
+    onSuccess: async () => {
       await queryClient.refetchQueries([AUTH_USER_QUERY_KEY])
       history.replace(HOME_PAGE)
     }

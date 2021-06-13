@@ -8,11 +8,13 @@ import {
   Text
 } from '@chakra-ui/layout'
 import { chakra, useColorModeValue as mode } from '@chakra-ui/system'
+import { IconProps, SvgIconTypeMap } from '@material-ui/core'
+import { OverridableComponent } from '@material-ui/core/OverridableComponent'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 export type NavItem = {
-  icon: any
+  icon: OverridableComponent<SvgIconTypeMap<IconProps, 'svg'>>
   active?: boolean
   count?: number
   href?: string

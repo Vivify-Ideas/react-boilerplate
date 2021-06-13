@@ -32,7 +32,7 @@ export default function LoginPage(): JSX.Element {
       align="center"
       justifyContent="center"
       direction="column"
-    >      
+    >
       <Logo mb={10} />
       <Heading size="md" mb={12}>
         {t('common.login')}
