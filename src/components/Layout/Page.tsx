@@ -1,11 +1,14 @@
 import { Box } from '@chakra-ui/layout'
-import { ReactJSXElementChildrenAttribute } from '@emotion/react/types/jsx-namespace'
+import { BoxProps } from '@chakra-ui/react'
 import React from 'react'
 
-export const Page = (props: { children: ReactJSXElementChildrenAttribute }) => {
+export const Page = ({
+  children,
+  ...boxProps
+}: React.PropsWithChildren<BoxProps>) => {
   return (
-    <Box w="full" h="full">
-      {props.children}
+    <Box w="full" h="full" {...boxProps}>
+      {children}
     </Box>
   )
 }

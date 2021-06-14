@@ -1,13 +1,16 @@
 import { Flex, Stack, Text } from '@chakra-ui/layout'
-import React, { ReactNode } from 'react'
+import { FlexProps, TextProps } from '@chakra-ui/react'
+import React from 'react'
 
-type JustChild = { children?: ReactNode }
 type PageHeader = {
   Title: typeof Title
   Description: typeof Description
   Actions: typeof Actions
 }
-const PageHeader: React.FC & PageHeader = ({ children }: JustChild) => {
+
+const PageHeader = ({
+  children
+}: React.PropsWithChildren<FlexProps & PageHeader>) => {
   const getChild = (type: string) =>
     React.Children.map(
       children,
@@ -24,23 +27,46 @@ const PageHeader: React.FC & PageHeader = ({ children }: JustChild) => {
   )
 }
 
-const Title = ({ children }: JustChild) => {
+const Title = ({
+  children,
+  ...textProps
+}: React.PropsWithChildren<TextProps>) => {
   return (
-    <Text textStyle="default" fontSize="2xl" fontWeight="semibold">
+    <Text
+      textStyle="default"
+      fontSize="2xl"
+      fontWeight="semibold"
+      {...textProps}
+    >
       {children}
     </Text>
   )
 }
 
-const Description = ({ children }: JustChild) => {
-  return <Text mr="auto">{children}</Text>
+const Description = ({
+  children,
+  ...textProps
+}: React.PropsWithChildren<TextProps>) => {
+  return (
+    <Text mr="auto" {...textProps}>
+      {children}
+    </Text>
+  )
 }
 
-const Actions = ({ children }: JustChild) => {
-  return <Flex ml="auto">{children}</Flex>
+const Actions = ({
+  children,
+  ...flexProps
+}: React.PropsWithChildren<FlexProps>) => {
+  return (
+    <Flex ml="auto" {...flexProps}>
+      {children}
+    </Flex>
+  )
 }
 
 PageHeader.Title = Title
 PageHeader.Description = Description
 PageHeader.Actions = Actions
+
 export default PageHeader

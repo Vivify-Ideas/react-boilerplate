@@ -1,4 +1,3 @@
-// import Scroll from './scroll'
 import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/hooks'
 import { Box, Stack } from '@chakra-ui/layout'
 import { useMediaQuery } from '@chakra-ui/media-query'
@@ -14,8 +13,9 @@ export const NavContext = createContext<
   | { isOpen?: boolean; onClose: () => void; onToggle: () => void }
 >({ isOpen: false, onClose: () => {}, onToggle: () => {} })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const DefaultLayout = ({ children }: any) => {
+export const DefaultLayout = ({
+  children
+}: React.PropsWithChildren<unknown>) => {
   const { user } = useAuth()
   const sidebarState = useDisclosure()
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)')

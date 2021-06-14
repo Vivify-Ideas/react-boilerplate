@@ -22,6 +22,7 @@ Boilerplate generated with [Vite ⚡️](https://vitejs.dev/)
 - Form Validation with [Formik](https://formik.org/) & [Yup](https://github.com/jquense/yup) - works nice with [ChakraUI](https://chakra-ui.com/) components thanks to [chakra-formik-experiment](https://github.com/with-heart/chakra-formik-experiment)
 - [ChakraUI](https://chakra-ui.com/): a simple, modular and accessible component library
 - [Sentry](https://sentry.io/welcome/): application monitoring platform
+- Pre-commit hooks with [husky](https://typicode.github.io/husky/#/) and [lint-staged](https://www.npmjs.com/package/lint-staged)
 
 ## Start
 
