@@ -5,6 +5,7 @@ import {
   HOME_PAGE,
   LOGIN_PAGE,
   PASSWORD_RECOVERY,
+  SETTINGS_PAGE,
   SIGNUP_PAGE
 } from '../constants'
 import useAuth from './../hooks/useAuth'
@@ -40,6 +41,11 @@ export const Router = (): JSX.Element => {
         exact
         path={HOME_PAGE}
         importPath={() => import('./../pages/HomePage')}
+      />
+      <AuthenticatedRoute
+        exact
+        path={SETTINGS_PAGE}
+        importPath={() => import('./../pages/SettingsPage')}
       />
       <GuestRoute
         exact

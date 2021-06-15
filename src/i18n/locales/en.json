@@ -58,5 +58,8 @@
     "link": {
       "logout": "Logout"
     }
+  },
+  "settings_page": {
+    "heading": "Settings"
   }
 }

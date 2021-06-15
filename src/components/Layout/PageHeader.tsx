@@ -1,66 +1,41 @@
 import { Flex, Stack, Text } from '@chakra-ui/layout'
-import { FlexProps, TextProps } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
+type JustChild = { children?: ReactNode }
 type PageHeader = {
   Title: typeof Title
   Description: typeof Description
   Actions: typeof Actions
 }
 
-const PageHeader = ({
-  children
-}: React.PropsWithChildren<FlexProps & PageHeader>) => {
-  const getChild = (type: string) =>
+const Title = ({ children }: JustChild) => (
+  <Text mr="auto" textStyle="default" fontSize="2xl" fontWeight="semibold">
+    {children}
+  </Text>
+)
+
+const Description = ({ children }: JustChild) => (
+  <Stack mr="auto">{children}</Stack>
+)
+
+const Actions = ({ children }: JustChild) => <Flex ml="auto">{children}</Flex>
+
+export const PageHeader: React.FC & PageHeader = ({ children }: JustChild) => {
+  const getChild = (component: ReactNode) =>
     React.Children.map(
       children,
-      child => (child as { type: { name: string } }).type.name === type && child
+      child => (child as ReactElement)?.type === component && child
     )
+
   return (
     <Flex w="full" direction="column">
-      {getChild('Title')}
       <Stack direction={{ base: 'column', xl: 'row' }}>
-        {getChild('Description')}
-        {getChild('Actions')}
+        {getChild(Title)}
+        {getChild(Actions)}
       </Stack>
-    </Flex>
-  )
-}
-
-const Title = ({
-  children,
-  ...textProps
-}: React.PropsWithChildren<TextProps>) => {
-  return (
-    <Text
-      textStyle="default"
-      fontSize="2xl"
-      fontWeight="semibold"
-      {...textProps}
-    >
-      {children}
-    </Text>
-  )
-}
-
-const Description = ({
-  children,
-  ...textProps
-}: React.PropsWithChildren<TextProps>) => {
-  return (
-    <Text mr="auto" {...textProps}>
-      {children}
-    </Text>
-  )
-}
-
-const Actions = ({
-  children,
-  ...flexProps
-}: React.PropsWithChildren<FlexProps>) => {
-  return (
-    <Flex ml="auto" {...flexProps}>
-      {children}
+      <Stack direction={{ base: 'column', xl: 'row' }}>
+        {getChild(Description)}
+      </Stack>
     </Flex>
   )
 }

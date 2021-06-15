@@ -58,5 +58,8 @@
     "link": {
       "logout": "Odjavi se"
     }
+  },
+  "settings_page": {
+    "heading": "Podešavanja"
   }
 }
