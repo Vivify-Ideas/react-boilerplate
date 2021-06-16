@@ -14,7 +14,9 @@
     "oops": "Oops! Something went wrong.",
     "settings": "Settings",
     "logout": "Logout",
-    "preview": "Preview"
+    "preview": "Preview",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   },
   "login_page": {
     "link": {

@@ -14,7 +14,9 @@
     "oops": "Oops! Nesto je pošlo po zlu...",
     "settings": "Podešavanja",
     "logout": "Odjavi se",
-    "preview": "Pregled"
+    "preview": "Pregled",
+    "cancel": "Odustani",
+    "confirm": "Potvrdi"
   },
   "login_page": {
     "link": {
