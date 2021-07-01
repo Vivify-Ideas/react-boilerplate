@@ -32,7 +32,8 @@ export function AuthProvider({
     error,
     isFetchedAfterMount: isUserLoaded
   } = useGetAuthenticatedUserQuery({
-    enabled: !!token
+    enabled: !!token,
+    refetchOnWindowFocus: false
   })
 
   const { mutate: login, error: loginError } = useLoginMutation()
