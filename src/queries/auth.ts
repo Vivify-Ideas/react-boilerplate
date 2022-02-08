@@ -4,7 +4,7 @@ import {
   useQueryClient,
   UseQueryOptions
 } from 'react-query'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { HOME_PAGE } from '../constants'
 import authService from '../services/AuthService'
 
@@ -21,19 +21,19 @@ export const useGetAuthenticatedUserQuery = (
 
 export const useLoginMutation = () => {
   const queryClient = useQueryClient()
-  const history = useHistory()
+  const navigate = useNavigate()
   return useMutation(authService.login, {
     onSuccess: async () => {
       await queryClient.refetchQueries([AUTH_USER_QUERY_KEY])
-      history.replace(HOME_PAGE)
+      navigate(HOME_PAGE, { replace: true })
     }
   })
 }
 
 export const useRegisterMutation = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   return useMutation(authService.register, {
-    onSuccess: () => history.replace(HOME_PAGE)
+    onSuccess: () => navigate(HOME_PAGE, { replace: true })
   })
 }
 

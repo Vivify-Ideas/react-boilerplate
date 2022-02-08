@@ -1,6 +1,5 @@
-import loadable, { DefaultComponent } from '@loadable/component'
-import React from 'react'
-import { Redirect, Route, RouteProps, Switch } from 'react-router-dom'
+import React, { Suspense, useEffect } from 'react'
+import { Route, RouteProps, Routes, useNavigate } from 'react-router-dom'
 import {
   HOME_PAGE,
   LOGIN_PAGE,
@@ -10,59 +9,90 @@ import {
 } from '../constants'
 import useAuth from './../hooks/useAuth'
 
-type AsyncRouteProps = RouteProps & {
-  importPath: <T>(props: T) => Promise<DefaultComponent<T>>
-}
+const HomePage = React.lazy(() => import('./../pages/HomePage'))
+const SettingsPage = React.lazy(() => import('./../pages/SettingsPage'))
+const LoginPage = React.lazy(() => import('./../pages/LoginPage'))
+const SignUpPage = React.lazy(() => import('./../pages/SignUpPage'))
+const PasswordRecoveryPage = React.lazy(
+  () => import('./../pages/PasswordRecoveryPage')
+)
 
-const AsyncRoute = ({ importPath, ...props }: AsyncRouteProps) => {
-  return <Route {...props} component={loadable(importPath)} />
-}
-
-const AuthenticatedRoute = (props: AsyncRouteProps) => {
+const AuthProtection = ({
+  children,
+  isOnlyForAuthUsers,
+  isOnlyForGuests
+}: React.PropsWithChildren<{
+  isOnlyForAuthUsers?: boolean
+  isOnlyForGuests?: boolean
+}>): JSX.Element => {
+  const navigate = useNavigate()
   const { user } = useAuth()
 
-  if (!user) return <Redirect to={LOGIN_PAGE} />
+  useEffect(() => {
+    if (isOnlyForAuthUsers && !user) return navigate(LOGIN_PAGE)
+    if (isOnlyForGuests && user) return navigate(HOME_PAGE)
+  }, [user, isOnlyForAuthUsers, isOnlyForGuests])
 
-  return <AsyncRoute {...props} />
+  return <>{children}</>
 }
 
-const GuestRoute = (props: AsyncRouteProps) => {
-  const { user } = useAuth()
-
-  if (user) return <Redirect to={HOME_PAGE} />
-
-  return <AsyncRoute {...props} />
+type ProtectedRouteWrapperProps = RouteProps & {
+  component: React.LazyExoticComponent<React.ComponentType<unknown>>
+  isAuthenticated?: boolean
+  isGuest?: boolean
 }
+
+const ProtectedRouteWrapper = ({
+  component: Loadable,
+  isAuthenticated,
+  isGuest
+}: ProtectedRouteWrapperProps) => (
+  <Suspense fallback={<>Loading...</>}>
+    {isAuthenticated && (
+      <AuthProtection isOnlyForAuthUsers>
+        <Loadable />
+      </AuthProtection>
+    )}
+    {isGuest && (
+      <AuthProtection isOnlyForGuests>
+        <Loadable />
+      </AuthProtection>
+    )}
+    {!isAuthenticated && !isGuest && <Loadable />}
+  </Suspense>
+)
 
 export const Router = (): JSX.Element => {
   return (
-    <Switch>
-      <AuthenticatedRoute
-        exact
+    <Routes>
+      <Route
         path={HOME_PAGE}
-        importPath={() => import('./../pages/HomePage')}
+        element={<ProtectedRouteWrapper component={HomePage} isAuthenticated />}
       />
-      <AuthenticatedRoute
-        exact
+      <Route
         path={SETTINGS_PAGE}
-        importPath={() => import('./../pages/SettingsPage')}
+        element={
+          <ProtectedRouteWrapper component={SettingsPage} isAuthenticated />
+        }
       />
-      <GuestRoute
-        exact
+
+      <Route
         path={LOGIN_PAGE}
-        importPath={() => import('./../pages/LoginPage')}
+        element={<ProtectedRouteWrapper component={LoginPage} isGuest />}
       />
-      <GuestRoute
-        exact
+
+      <Route
         path={SIGNUP_PAGE}
-        importPath={() => import('./../pages/SignUpPage')}
+        element={<ProtectedRouteWrapper component={SignUpPage} isGuest />}
       />
-      <GuestRoute
-        exact
+
+      <Route
         path={PASSWORD_RECOVERY}
-        importPath={() => import('./../pages/PasswordRecoveryPage')}
+        element={
+          <ProtectedRouteWrapper component={PasswordRecoveryPage} isGuest />
+        }
       />
-    </Switch>
+    </Routes>
   )
 }
 

@@ -9,7 +9,7 @@ const LOCALE_SR = 'sr'
 
 export const LOCALES = [LOCALE_EN, LOCALE_SR]
 
-export const DEFAULT_LOCALE = LOCALE_SR
+export const DEFAULT_LOCALE = LOCALE_EN
 
 const resources = {
   en: {
